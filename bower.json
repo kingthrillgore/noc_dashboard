@@ -1,0 +1,23 @@
+{
+  "name": "noc_dashboard",
+  "authors": [
+    "Cameron Kilgore <ghostfreeman@gmail.com>"
+  ],
+  "description": "NOC Dashboard",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "js/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "modernizr": "~3.3.1",
+    "angular": "~1.5.8"
+  }
+}
