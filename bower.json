@@ -20,6 +20,7 @@
     "angular": "~1.5.8",
     "mdi": "^1.7.22",
     "abdmob/x2js": "^1.2.0",
-    "angular-route": "^1.5.8"
+    "angular-route": "^1.5.8",
+    "reset-css": "^2.2.0"
   }
 }
