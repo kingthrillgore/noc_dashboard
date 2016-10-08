@@ -9,13 +9,18 @@ nocDashboard.config(function($routeProvider) {
     /* .when('/', {
       templateUrl: 'js/main/landing/templates/landing.html',
       controller: 'mainController'
-    })
+    }) */
 
-    //System Status page Router
+    System Status page Router
     .when('/system', {
       templateUrl: 'js/main/system/templates/system-landing.html',
-      controller: 'mainController'
-    }) */
+      controller: 'systemController'
+    })
+
+    .when('/jenkins', {
+      templateUrl: 'js/main/system/templates/jenkins-landing.html',
+      controller: 'jenkinsController'
+    })
 
     //TODO Network Routing rule
 
