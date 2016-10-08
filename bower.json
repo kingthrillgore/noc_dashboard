@@ -18,6 +18,7 @@
   ],
   "dependencies": {
     "modernizr": "~3.3.1",
-    "angular": "~1.5.8"
+    "angular": "~1.5.8",
+    "mdi": "^1.7.22"
   }
 }
