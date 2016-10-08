@@ -10,7 +10,7 @@ body, html { }
   color: #fff;
   height: 100%;
   width: 3%; /*10% with link text */
-  font-family: 'Roboto', sans-serif;
+  z-index: 5;
 }
 
 #wrapper .navigation ul {
@@ -58,19 +58,42 @@ body, html { }
   position: absolute;
   top: 0;
   right: 0;
-  width: 88%;
+  width: 95%;
+  z-index: 1;
 }
 
 #wrapper .content-wrapper h1,
 #wrapper .cotnent-wrapper h2,
-#wrapper .content-wrapper .font-montserrant {
-  font-family: 'Montserrant', sans-serif;
-}
-
 #wrapper .content-wrapper h3,
 #wrapper .content-wrapper h4,
 #wrapper .content-wrapper h5,
 #wrapper .content-wrapper h6,
-#wrapper .content-wrapper .font-ubuntu {
+#wrapper .content-wrapper .font-montserrant,
+.font-montserrant {
+  font-family: 'Montserrant', sans-serif;
+}
+
+#wrapper .content-wrapper .font-ubuntu,
+.font-ubuntu {
   font-family: 'Ubuntu', sans-serif;
+}
+
+#wrapper .content-wrapper .font-roboto,
+.font-roboto {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Weather */
+#wrapper .content-wrapper .weather {
+
+}
+
+.wunderground-logo {
+  position: absolute;
+  bottom: 0;
+  right: 35px;
+}
+
+.wunderground-logo a img {
+  width: 200px;
 }
