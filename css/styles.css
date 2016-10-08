@@ -1,3 +1,5 @@
+body, html { }
+
 #wrapper { }
 
 #wrapper .navigation {
@@ -7,7 +9,8 @@
   background: #000;
   color: #fff;
   height: 100%;
-  width: 10%;
+  width: 3%; /*10% with link text */
+  font-family: 'Roboto', sans-serif;
 }
 
 #wrapper .navigation ul {
@@ -17,6 +20,12 @@
 #wrapper .navigation ul li {
   list-style-type: none;
   display: block;
+  margin: 15px auto;
+  width: 50px;
+}
+
+#wrapper .navigation ul li:first-child {
+  margin-top: 0;
 }
 
 #wrapper .navigation a {
@@ -28,10 +37,20 @@
   font-size: 3em;
 }
 
+#wrapper .navigation a span {
+  display: none;
+}
+
 #wrapper .navigation .navigation-cycle-settings {
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 4px;
+}
+
+#wrapper .navigation .navigation-cycle-settings a {
+  margin: 0 auto;
+  width: 50px;
+  display: block;
 }
 
 #wrapper .content-wrapper {
@@ -40,4 +59,18 @@
   top: 0;
   right: 0;
   width: 88%;
+}
+
+#wrapper .content-wrapper h1,
+#wrapper .cotnent-wrapper h2,
+#wrapper .content-wrapper .font-montserrant {
+  font-family: 'Montserrant', sans-serif;
+}
+
+#wrapper .content-wrapper h3,
+#wrapper .content-wrapper h4,
+#wrapper .content-wrapper h5,
+#wrapper .content-wrapper h6,
+#wrapper .content-wrapper .font-ubuntu {
+  font-family: 'Ubuntu', sans-serif;
 }
