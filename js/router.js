@@ -7,20 +7,20 @@ nocDashboard.config(function($routeProvider) {
 
     //Landing page Router
     /* .when('/', {
-      templateUrl: 'js/landing/templates/landing.html',
+      templateUrl: 'js/main/landing/templates/landing.html',
       controller: 'mainController'
     })
 
     //System Status page Router
     .when('/system', {
-      templateUrl: 'js/system/templates/system-landing.html',
+      templateUrl: 'js/main/system/templates/system-landing.html',
       controller: 'mainController'
     }) */
 
     //TODO Network Routing rule
 
     .when('/weather', {
-      templateUrl: 'js/weather/weather-landing.html',
+      templateUrl: 'js/main/weather/templates/weather-landing.html',
       controller: 'weatherController'
     });
 });

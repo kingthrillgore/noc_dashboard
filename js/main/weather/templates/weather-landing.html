@@ -1,3 +1,28 @@
-<div>
-  
+<div ng-controller="weatherController" class="weather" ng-init="pageInit()">
+  <div class="row">
+    <div class='col-lg-6 weather-radar'>
+      <img src="{{weather.radarImage}}" alt="Radar Image" />
+      <p>Last updated: {{weather.update_time}}</p>
+    </div>
+
+  <div class="col-lg-6">
+    <div class="current-conditions">
+      <h2>{{location_details.city}} {{location_details.state}}</h2>
+      <p class="font-montserrant">{{weather.temperature}} &deg;</p>
+    </div>
+    <div class="forecast">
+      <h3>Next 3 Days</h3>
+    </div>
+  </div>
+
+  <div class="row nws-alerts" ng-controller="CAPHandlerController">
+    <div class="col-lg-12">
+      <h2>Current NWS Alerts</h2>
+      <!-- TODO ng-repeat -->
+    </div>
+  </div>
+</div>
+
+<div class="row wunderground-logo">
+  <a href="http://wunderground.com" target="_blank"><img src="img/wundergroundLogo_4c_horz_std.png" alt="Powerered by Weather Underground" /></a>
 </div>
