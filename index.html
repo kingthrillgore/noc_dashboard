@@ -11,8 +11,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
+        <link rel="stylesheet" href="js/vendor/reset-css/reset.css">
         <link rel="stylesheet" href="css/normalize.min.css">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/styles.css">
 
         <!-- Icons -->
         <link rel="stylesheet" href="js/vendor/mdi/css/materialdesignicons.css" />
@@ -51,10 +53,16 @@
 
         <div id="wrapper">
           <div class="navigation">
-            <ng-include src="js/tabs/templates/tabs-nav-side.html"></ng-include>
+            <div class="navigation-inner" ng-include src="'js/main/tabs/templates/tabs-nav-side.html'"></div>
+
+            <div class="navigation-cycle-settings">
+              <a href="#"><i class="mdi mdi-settings"></i></a>
+            </div>
           </div>
 
-          <div class="content-wrapper" ng-view></div>
+          <div class="content-wrapper">
+            <div class="content" ng-view></div>
+          </div>
         </div>
 
         <!-- H5BP JS that can be removed later -->
