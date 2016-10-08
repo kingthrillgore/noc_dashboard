@@ -2,11 +2,11 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="" ng-app="nocDashboard"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
+        <title>LPG NOC Dashboard</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -18,8 +18,29 @@
         <link rel="stylesheet" href="js/vendor/mdi/css/materialdesignicons.css" />
 
         <!-- JS Libraries -->
-        <script src="js/vendor/modernizr/modernizr.js"></script>
+        <!--script src="js/vendor/modernizr/modernizr.js"></script-->
         <script src="js/vendor/angular/angular.js"></script>
+        <script src="js/vendor/abdmob/x2js/xml2json.js"></script>
+
+        <!-- Application Components -->
+        <!-- Initalize ng-app and config -->
+        <script src="js/app.js"></script>
+        <script src="js/config.js"></script>
+
+        <!-- Router -->
+
+        <!-- Tabs -->
+        <script src="js/main/tabs/controllers/tabsController.js"></script>
+        <script src="js/main/tabs/services/tabsFactory.js"></script>
+        <script src="js/main/tabs/services/tabsService.js"></script>
+
+        <!-- Weather -->
+        <script src="js/main/weather/constants/SAMEEventLevels.js"></script>
+        <script src="js/main/weather/constants/SAMEHeaderDictionary.js"></script>
+        <script src="js/main/weather/controllers/CAPHandlerController.js"></script>
+        <script src="js/main/weather/controllers/weatherController.js"></script>
+        <script src="js/main/weather/services/weatherFactory.js"></script>
+        <script src="js/main/weather/services/weatherService.js"></script>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -28,6 +49,7 @@
 
         <p>Hello world! This is HTML5 Boilerplate.</p>
 
+        <!-- H5BP JS that can be removed later -->
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
     </body>
