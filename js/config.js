@@ -7,9 +7,11 @@ nocDashboard.constant("SETTINGS", {
   //NOC Dashboard
   "NOC_DASHBOARD_API_PATH":"http://localhost:9001",
 
-  //Nagios/Icinga
+  //Nagios
   "NAGIOS_STATUS_PAGE" : "index.html",
-  "NAGIOS_API_PATH":"http://localhost:9001",
+  "NAGIOS_API_PATH":"http://localhost:8080",
+
+  //TODO Icinga
 
   //NWS CAP Alerts
   "CAP_ATOM_FEED" : "https://alerts.weather.gov/cap/wwaatmget.php?x=GAZ033&y=0",

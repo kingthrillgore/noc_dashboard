@@ -4,5 +4,7 @@
  */
 
 nocDashboard.controller("systemController", function($scope, systemFactory) {
+  $scope.pageInit = function() {
 
+  };
 });

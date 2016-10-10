@@ -28,6 +28,7 @@
         <script src="js/vendor/angular/angular.js"></script>
         <script src="js/vendor/abdmob/x2js/xml2json.js"></script>
         <script src="js/vendor/angular-route/angular-route.min.js"></script>
+        <script src="js/vendor/moment/moment.js"></script>
 
         <!-- Application Components -->
         <!-- Initalize ng-app and config -->
@@ -42,7 +43,15 @@
         <script src="js/main/tabs/services/tabsFactory.js"></script>
         <script src="js/main/tabs/services/tabsService.js"></script>
 
-        <!-- System -->
+        <!-- System (Nagios) -->
+        <script src="js/main/system/controllers/systemController.js"></script>
+        <script src="js/main/system/directives/systemPanelItem.js"></script>
+        <script src="js/main/system/services/systemFactory.js"></script>
+
+        <!-- Jenkins -->
+        <script src="js/main/jenkins/controllers/jenkinsController.js"></script>
+        <script src="js/main/jenkins/services/jenkinsFactory.js"></script>
+        <script src="js/main/jenkins/services/jenkinsService.js"></script>
 
         <!-- Weather -->
         <script src="js/main/weather/constants/SAMEEventLevels.js"></script>
