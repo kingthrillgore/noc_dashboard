@@ -23,6 +23,7 @@
     "angular-route": "^1.5.8",
     "reset-css": "^2.2.0",
     "angular-popeye": "^1.0.5",
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "moment": "^2.15.1"
   }
 }
