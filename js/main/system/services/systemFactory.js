@@ -41,12 +41,15 @@ nocDashboard.factory('systemFactory', function($http, $q) {
       NagiosAPIPort = 6315;
     }
 
+    var deferred = $q.defer();
+
     //Get objects from URL
     var requestUrl = NagiosAPIURL+":"+NagiosAPIPort+"/state";
     $http.get(requestUrl).then(function(SuccessResponse) {
       console.debug("Nagios API Response", SuccessResponse);
       if(SuccessResponse.success !== false) {
-        return SuccessResponse.content;
+        //return SuccessResponse.data.content;
+        deferred.resolve(SuccessResponse.data.content);
       } else {
         console.log("Somthing's gone wrong.");
         var error = {
@@ -55,11 +58,14 @@ nocDashboard.factory('systemFactory', function($http, $q) {
           'message': "Something went wrong and we don't know what."
         };
 
-        return error;
+        //return error;
+        deferred.resolve(error);
       }
     }, function(ErrorResponse) {
       console.debug("Error", Error);
     });
+
+    return deferred.promise;
   };
 
   /**
@@ -88,7 +94,7 @@ nocDashboard.factory('systemFactory', function($http, $q) {
     $http.get(requestUrl).then(function(SuccessResponse) {
       console.debug("Nagios API Response", SuccessResponse);
       if(SuccessResponse.success !== false) {
-        return SuccessResponse.content;
+        return SuccessResponse.data.content;
       } else {
         console.log("Invalid host attribute passed, returning a error string");
         var error = {
@@ -103,4 +109,6 @@ nocDashboard.factory('systemFactory', function($http, $q) {
       console.debug("Error", Error);
     });
   };
+
+  return service;
 });

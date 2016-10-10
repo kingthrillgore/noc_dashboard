@@ -129,6 +129,14 @@ nocDashboard.factory('weatherFactory', function($http, $q) {
     return requestUrl;
   };
 
+  /**
+   * Returns a serialized object of current Condition data from Weather Underground.
+   * @param  {[type]} WUAPIKey   [description]
+   * @param  {[type]} City       [description]
+   * @param  {[type]} State      [description]
+   * @param  {[type]} PostalCode [description]
+   * @return {[type]}            [description]
+   */
   service.getWundergroundConditionData = function(WUAPIKey, City, State, PostalCode) {
 
   };
