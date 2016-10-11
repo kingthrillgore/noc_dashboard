@@ -4,6 +4,8 @@
  */
 
 nocDashboard.controller("systemController", function($scope, systemFactory) {
+  $scope.nagiosResponse = {};
+
   $scope.pageInit = function() {
     $scope.getSystemStatusRecords("http://nagios.ckilgore.local", 8080);
   };
@@ -13,10 +15,18 @@ nocDashboard.controller("systemController", function($scope, systemFactory) {
       console.debug("Results", Response);
 
       //Pass the Response back to be built within directives.
+      $scope.nagiosResponse = Response;
     });
   };
 
   $scope.buildStatusRecordElemment = function(statusItem) {
 
+  };
+});
+
+nocDashboard.filter("HumanReadableDateUS", function() {
+  return function(unixTime) {
+    var readableDate = moment(unixTime, "X").format('MMM D YYYY h:MM a');
+    return readableDate;
   };
 });

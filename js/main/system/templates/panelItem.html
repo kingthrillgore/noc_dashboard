@@ -1,13 +1,14 @@
 <div class="panelItem col-lg-3">
+  <p>Panel Item Directive</p>
   <div class="panel-heading-wrapper">
-    <h3>NAGIOS_HOSTNAME</h3>
+    <h3>{{nagiosItem.key}}</h3>
     <img src="#" alt="General Health" />
   </div>
-  <p>Last Updated at: TIME</p>
+  <p>Last Updated at: {{nagiosItem.last_check | HumanReadableDateUS}}</p>
   <ul class="services">
-    <li ng-repeat="(servicesKey, servicesValue) in services">
-      <h4>SERVICE_NAME</h4>
-      <p title="Last Updated at SERVICES_VALUE_TIME">STATUS_TEXT</p>
+    <li ng-repeat="(servicesKey, servicesValue) in nagiosItem.services">
+      <h4>{{nagiosItem.servicesKey}}</h4>
+      <p title="Last Updated at SERVICES_VALUE_TIME">{{nagiosItem.plugin_output}}</p>
       <img src="#" alt="Status Icon" />
     </li>
   </ul>

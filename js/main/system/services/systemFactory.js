@@ -22,13 +22,26 @@ nocDashboard.factory('systemFactory', function($http, $q) {
       NagiosAPIPort = 6315;
     }
 
+    var deferred = $q.defer();
+
     //Get Objects from API
     var requestUrl = NagiosAPIURL+":"+NagiosAPIPort+"/objects";
     $http.get(requestUrl).then(function(SuccessResponse) {
       console.debug("Nagios API Response", SuccessResponse);
+      deferred.resolve(SuccessResponse.data.content);
     }, function(ErrorResponse) {
-      console.debug("Error", Error);
+      console.log("Somthing's gone wrong.");
+      var error = {
+        'error': true,
+        'type': "UNKNOWN_ERROR",
+        'message': "Something went wrong and we don't know what."
+      };
+
+      //return error;
+      deferred.resolve(error);
     });
+
+    return deferred.promise;
   };
 
   service.getNagiosAllHostsStatus = function(NagiosAPIURL, NagiosAPIPort) {

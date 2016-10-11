@@ -1,11 +1,44 @@
 <div ng-controller="systemController" class="system" ng-init="pageInit()">
-  <div class="row">
+  <!--div class="row">
     <div class="col-lg-12">
       <h1>System Dashboard</h1>
     </div>
-  </div>
+  </div -->
 
   <div class="row">
+    <!--panelItem response="nagiosResponse"></panelItem-->
 
+    <div class="panelItem col-lg-3" ng-repeat="(nagiosRecordKey, nagiosRecordValue) in nagiosResponse">
+      <div class="panel-heading-wrapper">
+        <h3>
+          {{nagiosRecordKey}}
+          <i class="mdi mdi-check" style="color: green"></i> <!-- TODO Get Status from Nagios -->
+        </h3>
+        <!--img src="#" alt="General Health" /-->
+        <p><i class="mdi mdi-clock" title="Last Updated"></i> {{nagiosRecordValue.last_check | HumanReadableDateUS}}</p>
+      </div>
+
+      <ul class="services">
+        <li ng-repeat="(servicesKey, servicesValue) in nagiosRecordValue.services">
+          <h4 title="Last Updated at {{servicesValue.last_check | HumanReadableDateUS}}">{{servicesKey | limitTo : 45 : 0}}</h4>
+          <!-- OK Statuses (TODO: Convert to Regex) -->
+          <i class="mdi mdi-checkbox-marked-circle" style="color: green" title="{{servicesValue.plugin_output}}" ng-if="servicesValue.plugin_output.indexOf('OK') > -1"></i>
+          <i class="mdi mdi-checkbox-marked-circle" style="color: green" title="{{servicesValue.plugin_output}}" ng-if="servicesValue.plugin_output.indexOf('ok') > -1"></i>
+          <i class="mdi mdi-checkbox-marked-circle" style="color: green" title="{{servicesValue.plugin_output}}" ng-if="servicesValue.plugin_output.indexOf('Synology model') > -1"></i>
+
+          <!-- WARNING Statuses (TODO: Convert to Regex) -->
+          <i class="mdi mdi-alert-circle" style="color: yellow;" title="{{servicesValue.plugin_output}}" ng-if="servicesValue.plugin_output.indexOf('WARNING') > -1"></i>
+
+          <!-- CRITICAL Statuses (TODO: Convert to Regex) -->
+          <i class="mdi mdi-alert" style="color: red; animation: blinker 1s linear infinite;" title="{{servicesValue.plugin_output}}" ng-if="servicesValue.plugin_output.indexOf('CRITICAL') > -1"></i>
+
+          <!-- UNKNOWN Statuses (TODO: Convert to Regex) -->
+
+          <!-- TODO Get Status from Nagios -->
+          <!--p>{{servicesValue.plugin_output}}</p-->
+          <!--img src="#" alt="Status Icon" /-->
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

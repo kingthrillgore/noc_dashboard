@@ -83,6 +83,53 @@ body, html { }
   font-family: 'Roboto', sans-serif;
 }
 
+/* System */
+#wrapper .content-wrapper .system {
+
+}
+
+.system .row .panelItem {
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
+
+.system .row .panelItem .panel-heading-wrapper {
+  overflow: hidden;
+}
+
+.system .row .panelItem .panel-heading-wrapper * {
+  display: inline-block;
+}
+
+.system .row .panelItem .panel-heading-wrapper h3 {
+  float: left;
+}
+
+.system .row .panelItem .panel-heading-wrapper p {
+  float: right;
+  margin-top: 20px;
+}
+
+.system .row .panelItem .services {
+
+}
+
+.system .row .panelItem .services li {
+  overflow: hidden;
+}
+
+.system .row .panelItem .services li * {
+  display: inline-block;
+}
+
+.system .row .panelItem .services li h4 {
+
+}
+
+.system .row .panelItem .services li i {
+
+}
+
 /* Weather */
 #wrapper .content-wrapper .weather {
 
@@ -96,4 +143,13 @@ body, html { }
 
 .wunderground-logo a img {
   width: 200px;
+}
+
+/* Globals */
+
+/* a e s t h e t i c */
+@-webkit-keyframes blinker {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
 }
