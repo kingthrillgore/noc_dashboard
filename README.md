@@ -36,7 +36,14 @@ For JIRA, you will need to use the REST API. If available, WebSockets via OAuth 
 TBD
 
 ## Installation
-To install, clone this git repo, unpack to a web server, and then install Bower dependencies.
+To install, clone this git repo, unpack to a web server, and then install Bower dependencies:
+
+```shell
+$ git clone {{ repo }}
+$ bower install
+```
+
+If you have issues setting up a web server to host your application, please click the Back button and find another career choice.
 
 ## License
 Available under the terms of the MIT License. See LICENSE.md.
