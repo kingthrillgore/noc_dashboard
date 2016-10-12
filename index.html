@@ -14,6 +14,8 @@
         <link rel="stylesheet" href="js/vendor/reset-css/reset.css">
         <link rel="stylesheet" href="css/normalize.min.css">
         <link rel="stylesheet" href="js/vendor/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="js/vendor/angular-popeye/release/popeye.min.css">
+        <link rel="stylesheet" href="js/vendor/angular-bootstrap/ui-bootstrap-csp.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/styles.css">
 
@@ -26,9 +28,14 @@
         <!-- JS Libraries -->
         <!--script src="js/vendor/modernizr/modernizr.js"></script-->
         <script src="js/vendor/angular/angular.js"></script>
+        <script src="js/vendor/angular-animate/angular-animate.min.js"></script>
+        <script src="js/vendor/ngstorage/ngStorage.min.js"></script>
         <script src="js/vendor/abdmob/x2js/xml2json.js"></script>
         <script src="js/vendor/angular-route/angular-route.min.js"></script>
+        <script src="js/vendor/angular-bootstrap/ui-bootstrap.min.js"></script>
+        <script src="js/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
         <script src="js/vendor/moment/moment.js"></script>
+        <script src="js/vendor/angular-popeye/release/popeye.min.js"></script>
 
         <!-- Application Components -->
         <!-- Initalize ng-app and config -->
@@ -67,15 +74,12 @@
         <![endif]-->
 
         <div id="wrapper" ng-controller="tabsController">
-          <div class="navigation" ng-mouseover="mouseOverDetect" ng-class="{expanded: mouse_active}">
+          <div class="navigation" ng-init="pageInit()" ng-mouseover="mouseOverDetect()" ng-class="{expanded: mouse_active}">
             <div class="navigation-inner" ng-include src="'js/main/tabs/templates/tabs-nav-side.html'"></div>
 
-            <div class="navigation-cycle-settings">
-              <a href="#"><i class="mdi mdi-settings"></i></a>
-            </div>
           </div>
 
-          <div class="content-wrapper container" id="content-wrapper">
+          <div class="content-wrapper container-fluid" id="content-wrapper">
             <div class="content" ng-view></div>
           </div>
         </div>
