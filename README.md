@@ -4,7 +4,9 @@ This is an HTML5-based dashboard intended for use inside a Company's NOC or On C
 ## Requirements
 
 ### Systems Monitor (Nagios)
-To use the Systems monitor, you need to use Nagios 3, 4, or XI with the (nagios-api)[https://github.com/zorkian/nagios-api] application, or else there is no way to get Nagios data to the dashboard.
+To use the Systems monitor, you need to use Nagios 3, 4, or XI with the [nagios-api](https://github.com/zorkian/nagios-api) application, or else there is no way to get Nagios data to the dashboard.
+
+There is no native Nagios 4/XI support at this time.
 
 ### Systems Monitor (Icinga)
 If you are using systems-icinga, then you need nothing else. Icinga2 has its own REST Service. Just define those settings in config.js.
@@ -17,12 +19,17 @@ To receive Severe Weather Alerts, you can use either Weather Underground or the 
 
 Regardless of what mechanism you use, you can configure what kind of alerts are displayed by changing config.js to match the definitions defined in weather_alerts.md. By default its set to warnings only, which covers all the Wunderground alert types and alerts considered WARN classification by the FCC/CEA Alerts Working Group.
 
+All codes related to the national activation of the EAS are not covered by this service. It goes without saying that if the EAS is activated, you may have bigger concerns than your job.
+
 Weather Alerts are not supported for Europe using either mechanism. If you are not a EU user, set "ENABLE_WEATHER_ALERTS" to false. If you are an EU user and can help with this, check the open ticket.
 
 #### NWS Alerts
 To use the NWS Feeds, you will need to get [the FIPS code for your region](http://www.nws.noaa.gov/nwr/coverage/county_coverage.html). These alerts have substantially more detail than Wunderground, and cover every possible warning considered part of the EAS SAME Standard.
 
-All codes excluding EAN/EAT are covered by this service. The NWS does not provision support for these codes. It goes without saying that if the EAS is activated, running a NOC will be the least of your concerns.
+By default, alerts considered WARN by the EAS standard will be displayed. If you want this to function similar to Wunderground alerts, set config.js to use "WARN_WUNDERGROUND". This will skip a lot of non-weather related alerts.
+
+All codes related to the activation of the EAS are not covered by this service (The NWS does not provision support for these codes). It goes without saying that if the EAS is activated, you may have bigger concerns than your job.
+
 
 ### Network
 TBD
