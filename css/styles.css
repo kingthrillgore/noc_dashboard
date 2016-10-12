@@ -21,7 +21,7 @@ body, html { }
   list-style-type: none;
   display: block;
   margin: 15px auto;
-  width: 50px;
+  width: 42px;
 }
 
 #wrapper .navigation ul li:first-child {
@@ -44,7 +44,7 @@ body, html { }
 #wrapper .navigation .navigation-cycle-settings {
   position: absolute;
   bottom: 0;
-  left: 4px;
+  left: 14%;
 }
 
 #wrapper .navigation .navigation-cycle-settings a {
@@ -69,6 +69,13 @@ body, html { }
 #wrapper .content-wrapper h5,
 #wrapper .content-wrapper h6,
 #wrapper .content-wrapper .font-montserrant,
+.modal-wrapper h1,
+.modal-wrapper h2,
+.modal-wrapper h3,
+.modal-wrapper h4,
+.modal-wrapper h5,
+.modal-wrapper h6,
+.modal-wrapper .font-montserrant,
 .font-montserrant {
   font-family: 'Montserrat', sans-serif;
 }

@@ -1,0 +1,44 @@
+<div class="container-fluid modal-wrapper">
+  <h1>Dashboard Settings</h1>
+
+  <form ng-submit="saveApplicationSettings()">
+    <fieldset>
+      <legend>General</legend>
+
+      <div class="form-group">
+        <label for="cycleTime">Seconds per screen</label>
+        <input type="number" class="form-control" id="cycleTime" ng-model="settings.cycleTime" />
+      </div>
+
+      <div class="checkbox">
+        <label for="haltPageChange">
+          <input type="checkbox" id="haltPageChange" ng-model="settings.disableScreenChange" /> Disable screen changing
+        </label>
+        <p>This will automatically disable if you click one of the tabs.</p>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Weather</legend>
+
+      <div class="checkbox">
+        <label for="enableLiveAlerts">
+          <input type="checkbox" id="enableLiveAlerts" ng-model="settings.enableLiveAlerts" /> Enable Live Alerts
+        </label>
+        <p><span style="font-weight:bold">This is still a beta feature.</span> When a weather alert is received, the system will immediately open a modal specifying the weather alert, followed by an alert noise (if your browser supports HTML5 audio). You must have NWS CAP Feeds enabled, and the NOCDashboard WebSocketsService Application.</p>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Restore Defaults</legend>
+
+      <div class="form-group">
+        <p>This will erase all local settings and restore defaults.</p>
+
+        <button class="btn btn-danger">Reset Settings</button>
+      </div>
+    </fieldset>
+
+    <input type="submit" class="btn btn-default" value="Save Changes" />
+  </form>
+</div>

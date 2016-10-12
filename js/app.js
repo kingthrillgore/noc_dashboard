@@ -3,4 +3,4 @@
  * @author Cameron Kilgore
  */
 
-var nocDashboard = angular.module('nocDashboard', ['ngRoute']);
+var nocDashboard = angular.module('nocDashboard', ['ngRoute', "pathgather.popeye", "ngAnimate", "ngStorage"]);

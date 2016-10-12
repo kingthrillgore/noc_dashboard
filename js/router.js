@@ -6,15 +6,21 @@ nocDashboard.config(function($routeProvider) {
   $routeProvider
 
     //Landing page Router
-    /* .when('/', {
-      templateUrl: 'js/main/landing/templates/landing.html',
-      controller: 'mainController'
-    }) */
+    .when('/', {
+      templateUrl: 'js/main/system/templates/system-landing.html',
+      controller: 'systemController'
+    })
 
     //System Status page Router
     .when('/system', {
       templateUrl: 'js/main/system/templates/system-landing.html',
       controller: 'systemController'
+    })
+
+    //Network Status page
+    .when('/network', {
+      templateUrl: 'js/main/network/templates/network-landing.html',
+      controller: 'networkController'
     })
 
     //Jenkins Status
@@ -23,11 +29,12 @@ nocDashboard.config(function($routeProvider) {
       controller: 'jenkinsController'
     })
 
-    //TODO Network Routing rule
-
     //Weather
     .when('/weather', {
       templateUrl: 'js/main/weather/templates/weather-landing.html',
       controller: 'weatherController'
     });
+
+    //News
+    //.when('/')
 });

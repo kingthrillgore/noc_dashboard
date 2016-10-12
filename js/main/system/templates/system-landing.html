@@ -12,7 +12,14 @@
       <div class="panel-heading-wrapper">
         <h3>
           {{nagiosRecordKey}}
-          <i class="mdi mdi-check" style="color: green"></i> <!-- TODO Get Status from Nagios -->
+
+          <!-- Stable States -->
+          <i class="mdi mdi-check" style="color: green" ng-show="nagiosRecordValue.current_state === '0'"></i> <!-- TODO Get Status from Nagios -->
+
+          <!-- WARNING States -->
+          <i class="mdi mdi-alert" style="color: red" ng-show="nagiosRecordValue.current_state === '1'"></i>
+
+          <!-- CRITICAL states -->
         </h3>
         <!--img src="#" alt="General Health" /-->
         <p><i class="mdi mdi-clock" title="Last Updated"></i> {{nagiosRecordValue.last_check | HumanReadableDateUS}}</p>

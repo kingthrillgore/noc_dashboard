@@ -26,7 +26,7 @@ nocDashboard.controller("systemController", function($scope, systemFactory) {
 
 nocDashboard.filter("HumanReadableDateUS", function() {
   return function(unixTime) {
-    var readableDate = moment(unixTime, "X").format('MMM D YYYY h:MM a');
+    var readableDate = moment.unix(unixTime).format('MMM D YYYY h:MM a');
     return readableDate;
   };
 });
