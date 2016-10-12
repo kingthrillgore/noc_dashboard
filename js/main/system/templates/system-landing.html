@@ -6,6 +6,12 @@
   </div -->
 
   <div class="row">
+    <div class="nagios-summary">
+      
+    </div>
+  </div>
+
+  <div class="row">
     <!--panelItem response="nagiosResponse"></panelItem-->
 
     <div class="panelItem col-lg-3" ng-repeat="(nagiosRecordKey, nagiosRecordValue) in nagiosResponse">
@@ -17,9 +23,14 @@
           <i class="mdi mdi-check" style="color: green" ng-show="nagiosRecordValue.current_state === '0'"></i> <!-- TODO Get Status from Nagios -->
 
           <!-- WARNING States -->
-          <i class="mdi mdi-alert" style="color: red" ng-show="nagiosRecordValue.current_state === '1'"></i>
+          <!-- Ideally should throw when at least two or more WARNING states are thrown by the host record -->
 
           <!-- CRITICAL states -->
+          <!-- Ideally should throw when at least one CRITICAL is thrown by the host record -->
+          <i class="mdi mdi-alert" style="color: red" ng-show="nagiosRecordValue.current_state === '1'"></i>
+
+          <!-- Under Active Maintenance -->
+          <!-- If Nagios has an active maintenance issuer (problem_has_been_acknowledged), this will display -->
         </h3>
         <!--img src="#" alt="General Health" /-->
         <p><i class="mdi mdi-clock" title="Last Updated"></i> {{nagiosRecordValue.last_check | HumanReadableDateUS}}</p>
@@ -38,6 +49,7 @@
 
           <!-- CRITICAL Statuses (TODO: Convert to Regex) -->
           <i class="mdi mdi-alert" style="color: red; animation: blinker 1s linear infinite;" title="{{servicesValue.plugin_output}}" ng-if="servicesValue.plugin_output.indexOf('CRITICAL') > -1"></i>
+          <i class="mdi mdi-alert" style="color: red; animation: blinker 1s linear infinite;" title="{{servicesValue.plugin_output}}" ng-if="servicesValue.plugin_output.indexOf('No route to host') > -1"></i>
 
           <!-- UNKNOWN Statuses (TODO: Convert to Regex) -->
 
