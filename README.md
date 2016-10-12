@@ -35,9 +35,7 @@ All codes related to the activation of the EAS are not covered by this service (
 TBD
 
 ### Tickets
-By default, the system will parse Redmine, Trac, and OpenProject tickets from RSS feeds, once defined in the config.js.
-
-For JIRA, you will need to use the REST API. If available, WebSockets via OAuth is available as well. See configuration_jira.md for details. This has been configured for JIRA 7.4 OnDemand and Standalone.
+By default, the system will parse JIRA, Redmine, Trac, and OpenProject tickets from RSS feeds, once defined in the config.js.
 
 ### Jenkins
 TBD
