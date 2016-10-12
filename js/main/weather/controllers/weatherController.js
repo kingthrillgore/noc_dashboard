@@ -32,7 +32,23 @@ nocDashboard.controller("weatherController", function($scope, weatherFactory) {
   $scope.getForecastInfo = function() {
 
   };
-
+  
+  /**
+   * Delegate method that based on config, passes on request to either
+   * the WU or NWS Alert request Factory call.
+   */
+  $scope.getWeatherAlerts = function() {
+  
+  };
+  
+  $scope.getAlertsFromWunderground = function() {
+  
+  };
+  
+  $scope.getAlertsFromNWS = function() {
+  
+  };
+  
   $scope.updateWeatherInfo = function() {
 
   };

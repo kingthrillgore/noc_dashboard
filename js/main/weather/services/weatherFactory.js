@@ -13,12 +13,11 @@ nocDashboard.factory('weatherFactory', function($http, $q) {
   var service = {};
 
   /**
-   * Makes an HTTP GET request to the CAP Atom feed, and returns an array of all
-   * serialized CAP records referenced in the Atom feed. The execution time on
-   * this component is n*n+1.
+   * Makes an HTTP GET request to the NWS Atom feed, and returns an array of all
+   * serialized alerts records as a Promise.
    * @return {[type]} [description]
    */
-  service.getCAPRecords = function(CAPFeedUrl, MaxNumberOfEntries) {
+  service.getNWSWeatherAlerts = function(CAPFeedUrl, MaxNumberOfEntries) {
     if(MaxNumberOfEntries === undefined) {
       MaxNumberOfEntries = 20;
     }
@@ -39,6 +38,19 @@ nocDashboard.factory('weatherFactory', function($http, $q) {
       console.debug("Error", ErrorResponse);
     });
   };
+  
+  /**
+   * Returns all the knowns alerts known to Wunderground based on the
+   * City and State as a Promise.
+   *
+   * @param  {string} WUAPIKey        Weather Underground API Key. Required.
+   * @param  {string} City            A Valid US City that can be used for the location. Required.
+   * @param  {string} State           A Valid US Postal code for a state or thoroughfare. Required.
+   * @return {promise}           [description]
+   */
+  service.getWUAPIWeatherAlerts = function (WUAPIKey, City, State) {
+    //TODO
+  };
 
   /**
    * Returns an Animated Radar image. Use the getWundergroundRadarData call for
@@ -49,7 +61,7 @@ nocDashboard.factory('weatherFactory', function($http, $q) {
    *
    * The example API Call is an image URL: http://api.wunderground.com/api/{{API_KEY}}/animatedradar/q/GA/Roswell.gif?width=800&height=600&timelabel=1&timelabel.y=10&num=15&rainsnow=1&delay=75&noclutter=1&smooth=1&newmaps=1
    * @param  {string} WUAPIKey        Weather Underground API Key. Required.
-   * @param  {string} City            A Valid US City that can be used for the location. If requesting internationally, use the OASIS xNAL equivalent locality name (full name). Require.
+   * @param  {string} City            A Valid US City that can be used for the location. If requesting internationally, use the OASIS xNAL equivalent locality name (full name). Required.
    * @param  {string} State           A Valid US Postal code for a state or thoroughfare. If requesting interantionally, use the OASIS xNAL equivalent country (full name). Required.
    * @param  {string} RadarFeedURL    Origin Radar Feed URL. Defaults to known base if not defined.
    * @param  {number} Frames          Number of frames to use. Integer only. Defaults to 15.
@@ -129,19 +141,28 @@ nocDashboard.factory('weatherFactory', function($http, $q) {
     return requestUrl;
   };
 
+  //TODO Static Radar Image Request Call
+
   /**
-   * Returns a serialized object of current Condition data from Weather Underground.
-   * @param  {[type]} WUAPIKey   [description]
-   * @param  {[type]} City       [description]
-   * @param  {[type]} State      [description]
-   * @param  {[type]} PostalCode [description]
-   * @return {[type]}            [description]
+   * Returns a Promise of current Condition data from Weather Underground.
+   * @param  {string} WUAPIKey        Weather Underground API Key. Required.
+   * @param  {string} City            A Valid US City that can be used for the location. If requesting internationally, use the OASIS xNAL equivalent locality name (full name). Required.
+   * @param  {string} State           A Valid US Postal code for a state or thoroughfare. If requesting interantionally, use the OASIS xNAL equivalent country (full name). Required.
+   * @return {promise}           [description]
    */
-  service.getWundergroundConditionData = function(WUAPIKey, City, State, PostalCode) {
+  service.getWundergroundConditionData = function(WUAPIKey, City, State) {
 
   };
 
-  service.getWundergroundForecastData = function(WUAPIKey, City, State, PostalCode) {
+  /**
+   * Returns a Promise of Forecast data from Weather Underground. The forecast covers the next three days by default.
+   * @param  {string} WUAPIKey        Weather Underground API Key. Required.
+   * @param  {string} City            A Valid US City that can be used for the location. If requesting internationally, use the OASIS xNAL equivalent locality name (full name). Required.
+   * @param  {string} State           A Valid US Postal code for a state or thoroughfare. If requesting interantionally, use the OASIS xNAL equivalent country (full name). Required.
+   * @param  {boolean} ReturnExtendedForecast  If set to true, the promise will return a 10-day forecast, opposed to the default 3-day. Defaults to false.
+   * @return {promise}           [description]
+   */
+  service.getWundergroundForecastData = function(WUAPIKey, City, State, ReturnExtendedForecast) {
 
   };
 

@@ -7,22 +7,24 @@
 
   <div class="col-lg-6">
     <div class="current-conditions">
+      <!-- TODO Condition Data -->
       <h2>{{location_details.city}} {{location_details.state}}</h2>
       <p class="font-montserrant">{{weather.temperature}} &deg;</p>
     </div>
     <div class="forecast">
       <h3>Next 3 Days</h3>
+      <!-- TODO Forecast -->
     </div>
   </div>
 
-  <div class="row nws-alerts" ng-controller="CAPHandlerController">
+  <div class="row nws-alerts" ng-controller="weatherController">
     <div class="col-lg-12">
-      <h2>Current NWS Alerts</h2>
-      <!-- TODO ng-repeat -->
+      <h2>Current Weather Alerts</h2>
+      <!-- TODO ng-repeat of Weather Alerts from (VENDOR) -->
     </div>
   </div>
 </div>
 
 <div class="row wunderground-logo">
-  <a href="http://wunderground.com" target="_blank"><img src="img/wundergroundLogo_4c_horz_std.png" alt="Powerered by Weather Underground" /></a>
+  <a href="http://wunderground.com" target="_blank"><img src="img/wundergroundLogo_4c_horz_std.png" alt="Powered by Weather Underground" /></a>
 </div>

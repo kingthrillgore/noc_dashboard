@@ -142,6 +142,10 @@ body, html { }
 
 }
 
+/**
+ * These CSS rules meet the brand guidelines set by Weather Underground. I wouldn't 
+ * fuck around with this, unless you have different arrangements with them.
+ */
 .wunderground-logo {
   position: absolute;
   bottom: 0;
