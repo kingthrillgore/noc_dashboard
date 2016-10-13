@@ -4,20 +4,22 @@
  */
 
 nocDashboard.controller("weatherController", function($scope, weatherFactory) {
+  $scope.location_details = {
+    city: "Roswell",
+    state: "GA",
+  };
+  $scope.nws_zone_code = "NCC101";
+  $scope.weather = {};
+  $scope.weather.radarImage = "";
+  $scope.weather.alerts = {};
+  $scope.weather.conditions = {};
+  $scope.weather.forecast = {};
+  
   $scope.pageInit = function() {
-    $scope.location_details = {
-      city: "Roswell",
-      state: "GA",
-    };
-
-    $scope.nws_zone_code = "NCC101";
-
-    //Stub out objects
-    $scope.weather = {}; //Manipulated through Wunderground calls
-    $scope.alerts = {};
-    $scope.conditions = {};
-    $scope.forecast = {};
-
+    $scope.loadWeatherData();
+  };
+  
+  $scope.loadWeatherData() {
     //TODO Get NWS Alerts (build a proxy for the Atom feed)
     //$scope.alerts = $scope.getNWSAlerts("NCZ106");
 
@@ -39,13 +41,13 @@ nocDashboard.controller("weatherController", function($scope, weatherFactory) {
   };
 
   $scope.getNWSAlerts = function(ZoneCode) {
-    $scope.alerts = weatherFactory.getNWSWeatherAlerts(ZoneCode);
+    $scope.weather.alerts = weatherFactory.getNWSWeatherAlerts(ZoneCode);
 
     console.debug("Alerts Call Made", $scope.alerts);
   };
 
   $scope.getWUAlerts = function(WUAPIKey, City, State) {
-    $scope.alerts = weatherFactory.getWUAPIWeatherAlerts(WUAPIKey, City, State);
+    $scope.weather.alerts = weatherFactory.getWUAPIWeatherAlerts(WUAPIKey, City, State);
 
     console.debug("Alerts Call Made", $scope.alerts);
   };
@@ -59,6 +61,6 @@ nocDashboard.controller("weatherController", function($scope, weatherFactory) {
   $scope.getForecastInfo = function(WUAPIKey, City, State) {
     $scope.weather.forecast = weatherFactory.getWundergroundForecastData(WUAPIKey, City, State);
     
-    console.debug("Forecast Call Made", $scope.weather.conditions)    
+    console.debug("Forecast Call Made", $scope.weather.forecast);
   };
 });
