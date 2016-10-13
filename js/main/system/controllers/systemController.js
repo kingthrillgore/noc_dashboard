@@ -3,7 +3,7 @@
  * @author Cameron Kilgore
  */
 
-nocDashboard.controller("systemController", function($scope, systemFactory) {
+nocDashboard.controller("systemController", function($scope, systemFactory, SETTINGS) {
   $scope.nagiosResponse = {};
 
   $scope.pageInit = function() {
