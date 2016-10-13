@@ -24,11 +24,13 @@ All codes related to the national activation of the EAS are not covered by this 
 Weather Alerts are not supported for Europe using either mechanism. If you are not a EU user, set "ENABLE_WEATHER_ALERTS" to false. If you are an EU user and can help with this, check the open ticket.
 
 #### NWS Alerts
-To use the NWS Feeds, you will need to get [the FIPS code for your region](http://www.nws.noaa.gov/nwr/coverage/county_coverage.html). These alerts have substantially more detail than Wunderground, and cover every possible warning considered part of the EAS SAME Standard.
+**NWS Alerts are currently in development.**
+
+~~To use the NWS Feeds, you will need to get [the FIPS code for your region](http://www.nws.noaa.gov/nwr/coverage/county_coverage.html). These alerts have substantially more detail than Wunderground, and cover every possible warning considered part of the EAS SAME Standard.
 
 By default, alerts considered WARN by the EAS standard will be displayed. If you want this to function similar to Wunderground alerts, set config.js to use "WARN_WUNDERGROUND". This will skip a lot of non-weather related alerts.
 
-All codes related to the activation of the EAS are not covered by this service (The NWS does not provision support for these codes). It goes without saying that if the EAS is activated, you may have bigger concerns than your job.
+All codes related to the activation of the EAS are not covered by this service (The NWS does not provision support for these codes). It goes without saying that if the EAS is activated, you may have bigger concerns than your job.~~
 
 
 ### Network

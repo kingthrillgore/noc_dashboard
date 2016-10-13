@@ -63,7 +63,7 @@ body, html { }
 }
 
 #wrapper .content-wrapper h1,
-#wrapper .cotnent-wrapper h2,
+#wrapper .content-wrapper h2,
 #wrapper .content-wrapper h3,
 #wrapper .content-wrapper h4,
 #wrapper .content-wrapper h5,
@@ -143,7 +143,7 @@ body, html { }
 }
 
 /**
- * These CSS rules meet the brand guidelines set by Weather Underground. I wouldn't 
+ * These CSS rules meet the brand guidelines set by Weather Underground. I wouldn't
  * fuck around with this, unless you have different arrangements with them.
  */
 .wunderground-logo {

@@ -7,7 +7,7 @@
  * Provides Weather Underground and NWS Alerts API Integration, through Wunderground
  * and NWS JSON and XML feeds.
  *
- * @type {Object}
+ * @type {Promise}
  */
 nocDashboard.factory('weatherFactory', function($http, $q) {
   var service = {};
@@ -15,19 +15,24 @@ nocDashboard.factory('weatherFactory', function($http, $q) {
   /**
    * Makes an HTTP GET request to the NWS Atom feed, and returns an array of all
    * serialized alerts records as a Promise.
+   * @todo implement a proxy solution to work around the CORS flag present on the
+   * NWS requests
    * @return {[type]} [description]
    */
-  service.getNWSWeatherAlerts = function(CAPFeedUrl, MaxNumberOfEntries) {
+  service.getNWSWeatherAlerts = function(ZoneCode, MaxNumberOfEntries) {
     if(MaxNumberOfEntries === undefined) {
       MaxNumberOfEntries = 20;
     }
 
-    if(CAPFeedUrl === undefined || CAPFeedUrl === null) {
+    if(typeof ZoneCode !== "string") {
       return false;
     }
 
+    //Build URL to download feed
+    var requestUrl = "http://alerts.weather.gov/cap/wwaatmget.php?x="+ZoneCode+"&y=0";
+
     //Make the first XMLHTTPRequest call for the Atom feed
-    $http.get(CAPFeedUrl).then(function(SuccessResponse) {
+    $http.get(requestUrl).then(function(SuccessResponse) {
       var x2js = new X2JS();
       AtomFeed = x2js.xml_str2json(SuccessResponse);
       console.debug("Atom Feed Data", AtomFeed);
@@ -38,7 +43,7 @@ nocDashboard.factory('weatherFactory', function($http, $q) {
       console.debug("Error", ErrorResponse);
     });
   };
-  
+
   /**
    * Returns all the knowns alerts known to Wunderground based on the
    * City and State as a Promise.
@@ -49,7 +54,43 @@ nocDashboard.factory('weatherFactory', function($http, $q) {
    * @return {promise}           [description]
    */
   service.getWUAPIWeatherAlerts = function (WUAPIKey, City, State) {
-    //TODO
+    //Validation
+    if(typeof WUAPIKey !== "string") {
+      return false;
+    }
+
+    if(typeof City !== "string") {
+      return false;
+    }
+
+    if(typeof State !== "string") {
+      return false;
+    }
+
+    var deferred = $q.defer();
+
+    //Build Request URL
+    var requestUrl = "http://api.wunderground.com/api/"+WUAPIKey+"/alerts/q/"+State+"/"+City+".json";
+
+    //Make Request and return Promise
+    $http.get(requestUrl).then(function(SuccessResponse) {
+      console.debug("Wunderground API Response", SuccessResponse);
+      if(SuccessResponse.success !== false) {
+        deferred.resolve(SuccessResponse.data);
+      } else {
+        console.log("Somthing's gone wrong.");
+        var error = {
+          'error': true,
+          'type': "UNKNOWN_ERROR",
+          'message': "Something went wrong and we don't know what."
+        };
+
+        //return error;
+        deferred.resolve(error);
+      }
+    }, function(ErrorResponse) {
+      console.debug("Error", Error);
+    });
   };
 
   /**
@@ -151,7 +192,43 @@ nocDashboard.factory('weatherFactory', function($http, $q) {
    * @return {promise}           [description]
    */
   service.getWundergroundConditionData = function(WUAPIKey, City, State) {
+    //Validation
+    if(typeof WUAPIKey !== "string") {
+      return false;
+    }
 
+    if(typeof City !== "string") {
+      return false;
+    }
+
+    if(typeof State !== "string") {
+      return false;
+    }
+
+    var deferred = $q.defer();
+
+    //Build Request URL
+    var requestUrl = "http://api.wunderground.com/api/"+WUAPIKey+"/conditions/q/"+State+"/"+City+".json";
+
+    //Make Request and return Promise
+    $http.get(requestUrl).then(function(SuccessResponse) {
+      console.debug("Wunderground API Response", SuccessResponse);
+      if(SuccessResponse.success !== false) {
+        deferred.resolve(SuccessResponse.data);
+      } else {
+        console.log("Somthing's gone wrong.");
+        var error = {
+          'error': true,
+          'type': "UNKNOWN_ERROR",
+          'message': "Something went wrong and we don't know what."
+        };
+
+        //return error;
+        deferred.resolve(error);
+      }
+    }, function(ErrorResponse) {
+      console.debug("Error", Error);
+    });
   };
 
   /**
@@ -163,7 +240,52 @@ nocDashboard.factory('weatherFactory', function($http, $q) {
    * @return {promise}           [description]
    */
   service.getWundergroundForecastData = function(WUAPIKey, City, State, ReturnExtendedForecast) {
+    //Validation
+    if(typeof WUAPIKey !== "string") {
+      return false;
+    }
 
+    if(typeof City !== "string") {
+      return false;
+    }
+
+    if(typeof State !== "string") {
+      return false;
+    }
+
+    if(typeof ReturnExtendedForecast !== "boolean") {
+      ReturnExtendedForecast = false;
+    }
+
+    var deferred = $q.defer();
+    var requestUrl = "";
+
+    //Build Request URL
+    if(ReturnExtendedForecast) {
+      requestUrl = "http://api.wunderground.com/api/"+WUAPIKey+"/forecast10day/q/"+State+"/"+City+".json";
+    } else {
+      requestUrl = "http://api.wunderground.com/api/"+WUAPIKey+"/forecast/q/"+State+"/"+City+".json";
+    }
+
+    //Make Request and return Promise
+    $http.get(requestUrl).then(function(SuccessResponse) {
+      console.debug("Wunderground API Response", SuccessResponse);
+      if(SuccessResponse.success !== false) {
+        deferred.resolve(SuccessResponse.data);
+      } else {
+        console.log("Somthing's gone wrong.");
+        var error = {
+          'error': true,
+          'type': "UNKNOWN_ERROR",
+          'message': "Something went wrong and we don't know what."
+        };
+
+        //return error;
+        deferred.resolve(error);
+      }
+    }, function(ErrorResponse) {
+      console.debug("Error", Error);
+    });
   };
 
   return service;

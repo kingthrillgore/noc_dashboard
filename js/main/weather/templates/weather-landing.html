@@ -17,10 +17,16 @@
     </div>
   </div>
 
-  <div class="row nws-alerts" ng-controller="weatherController">
+  <div class="row nws-alerts">
     <div class="col-lg-12">
       <h2>Current Weather Alerts</h2>
-      <!-- TODO ng-repeat of Weather Alerts from (VENDOR) -->
+        <ul class="list-alerts" ng-if="alerts.length > 0">
+          <li ng-repeat="(alertKey, alertValue) in alerts">
+              <p>Alert Record</p>
+          </li>
+        </ul>
+
+        <h3 ng-if="alerts.length === 0">There are no active Weather Alerts.</h3>
     </div>
   </div>
 </div>
