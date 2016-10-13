@@ -15,19 +15,23 @@ nocDashboard.controller("weatherController", function($scope, weatherFactory) {
     //Stub out objects
     $scope.weather = {}; //Manipulated through Wunderground calls
     $scope.alerts = {};
+    $scope.conditions = {};
+    $scope.forecast = {};
 
     //TODO Get NWS Alerts (build a proxy for the Atom feed)
     //$scope.alerts = $scope.getNWSAlerts("NCZ106");
 
     //Get Wunderground Alerts
-    $scope.alerts = $scope.getWUAlerts("WU_API_KEY", $scope.location_details.city, $scope.location_details.state);
+    $scope.getWUAlerts("WU_API_KEY", $scope.location_details.city, $scope.location_details.state);
 
     //Get Radar Image
     $scope.weather.radarImage = $scope.getRadarImage("WU_API_KEY", $scope.location_details.city, $scope.location_details.state);
 
     //Get Current Conditions Data
-    $scope.weather.temperature = 72;
-    $scope.weather.current_condition = "Overcast";
+    $scope.getConditionsInfo("WU_API_KEY", $scope.location_details.city, $scope.location_details.state);
+    
+    //Get Forecast Data
+    $scope.getForecastInfo("WU_API_KEY", $scope.location_details.city, $scope.location_details.state);
   };
 
   $scope.getRadarImage = function(WUAPIKey, City, State) {
@@ -37,40 +41,24 @@ nocDashboard.controller("weatherController", function($scope, weatherFactory) {
   $scope.getNWSAlerts = function(ZoneCode) {
     $scope.alerts = weatherFactory.getNWSWeatherAlerts(ZoneCode);
 
-    console.log("Weather Log Call Made");
+    console.debug("Alerts Call Made", $scope.alerts);
   };
 
   $scope.getWUAlerts = function(WUAPIKey, City, State) {
     $scope.alerts = weatherFactory.getWUAPIWeatherAlerts(WUAPIKey, City, State);
 
-    console.log("Alerts Log Call Made");
+    console.debug("Alerts Call Made", $scope.alerts);
   };
 
-  $scope.getConditionsInfo = function() {
-
+  $scope.getConditionsInfo = function(WUAPIKey, City, State) {
+    $scope.weather.conditions = weatherFactory.getWundergroundConditionData(WUAPIKey, City, State);
+    
+    console.debug("Conditions Call Made", $scope.weather.conditions);
   };
 
-  $scope.getForecastInfo = function() {
-
-  };
-
-  /**
-   * Delegate method that based on config, passes on request to either
-   * the WU or NWS Alert request Factory call.
-   */
-  $scope.getWeatherAlerts = function() {
-
-  };
-
-  $scope.getAlertsFromWunderground = function() {
-
-  };
-
-  $scope.getAlertsFromNWS = function() {
-
-  };
-
-  $scope.updateWeatherInfo = function() {
-
+  $scope.getForecastInfo = function(WUAPIKey, City, State) {
+    $scope.weather.forecast = weatherFactory.getWundergroundForecastData(WUAPIKey, City, State);
+    
+    console.debug("Forecast Call Made", $scope.weather.conditions)    
   };
 });
