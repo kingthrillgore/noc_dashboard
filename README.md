@@ -33,13 +33,13 @@ By default, alerts considered WARN by the EAS standard will be displayed. If you
 All codes related to the activation of the EAS are not covered by this service (The NWS does not provision support for these codes). It goes without saying that if the EAS is activated, you may have bigger concerns than your job.~~
 
 
-### Network
+## Network
 TBD
 
-### Tickets
+## Tickets
 By default, the system will parse JIRA, Redmine, Trac, and OpenProject tickets from RSS feeds, once defined in the config.js.
 
-### Jenkins
+## Jenkins
 TBD
 
 ## Installation
