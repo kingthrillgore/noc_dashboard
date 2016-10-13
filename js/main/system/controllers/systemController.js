@@ -19,7 +19,8 @@ nocDashboard.controller("systemController", function($scope, systemFactory) {
     });
   };
 
-  $scope.buildStatusRecordElemment = function(statusItem) {
+  //TODO
+  $scope.buildStatusRecordElement = function(statusItem) {
 
   };
 });
