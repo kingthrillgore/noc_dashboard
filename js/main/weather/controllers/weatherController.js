@@ -3,7 +3,7 @@
  * @author Cameron Kilgore
  */
 
-nocDashboard.controller("weatherController", function($scope, weatherFactory) {
+nocDashboard.controller("weatherController", function($scope, weatherFactory, SETTINGS) {
   $scope.location_details = {
     city: "Roswell",
     state: "GA",
