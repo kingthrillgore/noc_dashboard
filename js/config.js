@@ -3,54 +3,56 @@
  * @author Cameron Kilgore
  */
 
-nocDashboard.constant("SETTINGS", {
+nocDashboard.constant("settings", {
   //NOC Dashboard
-  "NOC_DASHBOARD_API_PATH": "http://localhost:9001",
-  
+  noc_dashboard_url: "http://localhost:9001",
+
   // ############################
   // Status Monitoring/Servers
   // ############################
-  "ENABLE_STATUS": true,
-  
+  enable_status: true,
+
   /*
    * Set to either "nagios" or "icinga2" based on the tool
    * you are using to monitor for changes
    */
-  "MONITORING_TOOL": "nagios",
+  moitoring_tool: "nagios",
 
   //Nagios
-  "NAGIOS_API_PATH": "http://localhost:8080",
-  
+  nagios_api_path: "http://localhost",
+  nagios_api_path_port: 8080,
+
   //Icinga
-  "ICINGA_API_PATH": "http://localhost:9002",
-  
+  icinga_api_path: "http://localhost",
+  icinga_api_path_port: 9002,
+
   /*
-   * Sets the maximum number of WARNING statuses that must be 
+   * Sets the maximum number of WARNING statuses that must be
    * returned to mark a host as being in a caution state
    * (this excludes if the service reports it is based on its rules)
    */
-  "MAX_ISSUES_BEFORE_CAUTION": 3,
-  
+  max_issues_before_caution: 3,
+
   // ##############
   // Weather
   // ##############
-  "ENABLE_WEATHER": true
-  "ENABLE_WEATHER_ALERTS": true,
-  
+  enable_weather: true,
+  enable_weather_alerts: true,
+
   /*
    * Set to either "nws" or "wunderground" based on where
    * you wish to fetch alerts from
    */
-  "WEATHER_ALERTS_ORIGIN": "wunderground",
-  
+  weather_alerts_origin: "wunderground",
+
   //Wunderground API Settings
-  "WUNDERGROUND_API_KEY": "N/A",
-  "LOCATION_CITY": "Asheville",
-  "LOCATION_STATE": "NC",
-  
+  wunderground_api_key: "N/A",
+  wunderground_city: "Asheville",
+  wunderground_state: "NC",
+
   //NWS Atom Feed Settings
   /*
    * Set this to the Zone Code for your region
    */
-  "CAP_ATOM_FEED_ZONECODE": "GAZ033",
+  cap_atom_feed_zonecode: "GAZ033",
 });

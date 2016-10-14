@@ -1,63 +1,79 @@
 <div ng-controller="systemController" class="system" ng-init="pageInit()">
-  <!--div class="row">
-    <div class="col-lg-12">
-      <h1>System Dashboard</h1>
-    </div>
-  </div -->
-
   <div class="row">
     <div class="nagios-summary">
-      
+      <div class="col-lg-4 col-lg-offset-1">
+        <h2 ng-if="nagios.hosts.online > 0">{{nagios.hosts.online}} Hosts Online</h2>
+        <h3 ng-if="nagios.hosts.problems > 0">{{nagios.hosts.problems}} Problems</h2>
+        <ul>
+          <li ng-if="nagios.hosts.down > 0"><h4>{{nagios.hosts.down}} are down</h4></li>
+          <li ng-if="nagios.hosts.unreachable > 0"><h4>{{nagios.hosts.unreachable}} are unreachable</h4></li>
+          <li ng-if="nagios.hosts.pending > 0"><h4>{{nagios.hosts.pending}} are pending</h4></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4 col-lg-offset-2">
+        <h2 ng-if="nagios.services.online > 0">{{nagios.services.online}} Services Operating Normally</h2>
+        <h3 ng-if="nagios.services.problems > 0">{{nagios.services.problems}} Problems</h3>
+        <ul>
+          <li ng-if="nagios.services.warning > 0"><h4>{{nagios.services.warning}} Warnings</h4></li>
+          <li ng-if="nagios.services.critical > 0"><h4>{{nagios.services.critical}} Critical</h4></li>
+          <li ng-if="nagios.services.unknown > 0"><h4>{{nagios.services.unknown}} Unknown</h4></li>
+          <li ng-if="nagios.services.pending > 0"><h4>{{nagios.services.pending}} Pending</h4></li>
+        </ul>
+      </div>
     </div>
   </div>
 
   <div class="row">
     <!--panelItem response="nagiosResponse"></panelItem-->
+    <div class="col-lg-6">
+      <ul class="panelItem" ng-repeat="(nagiosRecordKey, nagiosRecordValue) in nagios.nagiosResponse">
+        <li class="panelHostItem">
+          <h3>
+            {{nagiosRecordKey}}
 
-    <div class="panelItem col-lg-3" ng-repeat="(nagiosRecordKey, nagiosRecordValue) in nagiosResponse">
-      <div class="panel-heading-wrapper">
-        <h3>
-          {{nagiosRecordKey}}
+            <!-- Stable States -->
+            <i class="mdi mdi-check" style="color: green" ng-show="nagiosRecordValue.current_state === '0'"></i> <!-- TODO Get Status from Nagios -->
 
-          <!-- Stable States -->
-          <i class="mdi mdi-check" style="color: green" ng-show="nagiosRecordValue.current_state === '0'"></i> <!-- TODO Get Status from Nagios -->
+            <!-- WARNING States -->
+            <!-- Ideally should throw when at least two or more WARNING states are thrown by the host record -->
 
-          <!-- WARNING States -->
-          <!-- Ideally should throw when at least two or more WARNING states are thrown by the host record -->
+            <!-- CRITICAL states -->
+            <!-- Ideally should throw when at least one CRITICAL is thrown by the host record -->
+            <i class="mdi mdi-alert" style="color: red" ng-show="nagiosRecordValue.current_state === '1'"></i>
 
-          <!-- CRITICAL states -->
-          <!-- Ideally should throw when at least one CRITICAL is thrown by the host record -->
-          <i class="mdi mdi-alert" style="color: red" ng-show="nagiosRecordValue.current_state === '1'"></i>
-
-          <!-- Under Active Maintenance -->
-          <!-- If Nagios has an active maintenance issuer (problem_has_been_acknowledged), this will display -->
-        </h3>
-        <!--img src="#" alt="General Health" /-->
-        <p><i class="mdi mdi-clock" title="Last Updated"></i> {{nagiosRecordValue.last_check | HumanReadableDateUS}}</p>
-      </div>
-
-      <ul class="services">
-        <li ng-repeat="(servicesKey, servicesValue) in nagiosRecordValue.services">
-          <h4 title="Last Updated at {{servicesValue.last_check | HumanReadableDateUS}}">{{servicesKey | limitTo : 45 : 0}}</h4>
-          <!-- OK Statuses (TODO: Convert to Regex) -->
-          <i class="mdi mdi-checkbox-marked-circle" style="color: green" title="{{servicesValue.plugin_output}}" ng-if="servicesValue.plugin_output.indexOf('OK') > -1"></i>
-          <i class="mdi mdi-checkbox-marked-circle" style="color: green" title="{{servicesValue.plugin_output}}" ng-if="servicesValue.plugin_output.indexOf('ok') > -1"></i>
-          <i class="mdi mdi-checkbox-marked-circle" style="color: green" title="{{servicesValue.plugin_output}}" ng-if="servicesValue.plugin_output.indexOf('Synology model') > -1"></i>
-
-          <!-- WARNING Statuses (TODO: Convert to Regex) -->
-          <i class="mdi mdi-alert-circle" style="color: yellow;" title="{{servicesValue.plugin_output}}" ng-if="servicesValue.plugin_output.indexOf('WARNING') > -1"></i>
-
-          <!-- CRITICAL Statuses (TODO: Convert to Regex) -->
-          <i class="mdi mdi-alert" style="color: red; animation: blinker 1s linear infinite;" title="{{servicesValue.plugin_output}}" ng-if="servicesValue.plugin_output.indexOf('CRITICAL') > -1"></i>
-          <i class="mdi mdi-alert" style="color: red; animation: blinker 1s linear infinite;" title="{{servicesValue.plugin_output}}" ng-if="servicesValue.plugin_output.indexOf('No route to host') > -1"></i>
-
-          <!-- UNKNOWN Statuses (TODO: Convert to Regex) -->
-
-          <!-- TODO Get Status from Nagios -->
-          <!--p>{{servicesValue.plugin_output}}</p-->
-          <!--img src="#" alt="Status Icon" /-->
+            <!-- Under Active Maintenance -->
+            <!-- If Nagios has an active maintenance issuer (problem_has_been_acknowledged), this will display -->
+          </h3>
+          <!--img src="#" alt="General Health" /-->
+          <p><i class="mdi mdi-clock" title="Last Updated"></i> {{nagiosRecordValue.last_check | HumanReadableDateUS}}</p>
         </li>
       </ul>
+    </div>
+
+    <div class="col-lg-6">
+      <ul class="services panelServices">
+        <li ng-repeat="(servicesKey, servicesValue) in nagios.nagiosResponse">
+          <div ng-repeat="(serviceRecordKey, serviceRecordValue) in servicesValue.services">
+            <!-- WARNING Statuses (TODO: Convert to Regex) -->
+            <i class="mdi mdi-alert-circle" style="color: yellow;" title="{{serviceRecordValue.plugin_output}}" ng-if="serviceRecordValue.plugin_output.indexOf('WARNING') > -1"></i>
+
+            <!-- CRITICAL Statuses (TODO: Convert to Regex) -->
+            <i class="mdi mdi-alert" style="color: red; animation: blinker 1s linear infinite;" title="{{serviceRecordValue.plugin_output}}" ng-if="serviceRecordValue.plugin_output.indexOf('CRITICAL') > -1"></i>
+            <i class="mdi mdi-alert" style="color: red; animation: blinker 1s linear infinite;" title="{{serviceRecordValue.plugin_output}}" ng-if="serviceRecordValue.plugin_output.indexOf('No route to host') > -1"></i>
+
+            <h3 title="Last Updated at {{serviceRecordValue.last_check | HumanReadableDateUS}}" ng-if="serviceRecordValue.current_state.indexOf('0') === -1" >{{servicesKey}}: {{serviceRecordKey | limitTo : 45 }}</h3>
+
+            <p ng-if="serviceRecordValue.current_state.indexOf('0') === -1"><i class="mdi mdi-clock" title="Last Updated"></i> {{serviceRecordValue.last_check | HumanReadableDateUS}}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <p class="align-center">Last updated {{nagios.timeOfRequest}}</p>
     </div>
   </div>
 </div>

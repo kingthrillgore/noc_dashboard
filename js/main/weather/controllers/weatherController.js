@@ -14,12 +14,12 @@ nocDashboard.controller("weatherController", function($scope, weatherFactory, SE
   $scope.weather.alerts = {};
   $scope.weather.conditions = {};
   $scope.weather.forecast = {};
-  
+
   $scope.pageInit = function() {
     $scope.loadWeatherData();
   };
-  
-  $scope.loadWeatherData() {
+
+  $scope.loadWeatherData = function() {
     //TODO Get NWS Alerts (build a proxy for the Atom feed)
     //$scope.alerts = $scope.getNWSAlerts("NCZ106");
 
@@ -31,7 +31,7 @@ nocDashboard.controller("weatherController", function($scope, weatherFactory, SE
 
     //Get Current Conditions Data
     $scope.getConditionsInfo("WU_API_KEY", $scope.location_details.city, $scope.location_details.state);
-    
+
     //Get Forecast Data
     $scope.getForecastInfo("WU_API_KEY", $scope.location_details.city, $scope.location_details.state);
   };
@@ -54,13 +54,13 @@ nocDashboard.controller("weatherController", function($scope, weatherFactory, SE
 
   $scope.getConditionsInfo = function(WUAPIKey, City, State) {
     $scope.weather.conditions = weatherFactory.getWundergroundConditionData(WUAPIKey, City, State);
-    
+
     console.debug("Conditions Call Made", $scope.weather.conditions);
   };
 
   $scope.getForecastInfo = function(WUAPIKey, City, State) {
     $scope.weather.forecast = weatherFactory.getWundergroundForecastData(WUAPIKey, City, State);
-    
+
     console.debug("Forecast Call Made", $scope.weather.forecast);
   };
 });

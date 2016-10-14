@@ -95,45 +95,73 @@ body, html { }
 
 }
 
-.system .row .panelItem {
-  border: 1px solid #ccc;
-  border-radius: 15px;
+.system .row .nagios-summary {
+  min-height: 135px;
+  overflow: hidden;
+  margin: 5% 0 2%;
 }
 
-.system .row .panelItem .panel-heading-wrapper {
+.system .row .nagios-summary h2,
+.system .row .nagios-summary h3,
+.system .row .nagios-summary h4,
+.system .row .nagios-summary ul,
+.system .row .nagios-summary ul li {
+  margin: 0 0 1%;
+}
+
+.system .row .nagios-summary .col-lg-4 {
+  min-height: 130px;
+}
+
+.system .row .panelItem {
+  /* border: 1px solid #ccc;
+  border-radius: 15px; */
+}
+
+.system .row .panelItem {
+
+}
+
+.system .row .panelItem .panelHostItem {
   overflow: hidden;
 }
 
-.system .row .panelItem .panel-heading-wrapper * {
+.system .row .panelItem .panelHostItem * {
   display: inline-block;
 }
 
-.system .row .panelItem .panel-heading-wrapper h3 {
+.system .row .panelItem .panelHostItem h3 {
   float: left;
+  margin: 0 !important;
 }
 
-.system .row .panelItem .panel-heading-wrapper p {
-  float: right;
+.system .row .panelItem .panelHostItem p {
+  margin: 0 !important;
+  float: left;
   margin-top: 20px;
 }
 
-.system .row .panelItem .services {
+.system .row .panelServices {
 
 }
 
-.system .row .panelItem .services li {
+.system .row .panelServices li {
   overflow: hidden;
 }
 
-.system .row .panelItem .services li * {
+.system .row .panelServices li div * {
   display: inline-block;
 }
 
-.system .row .panelItem .services li h4 {
+.system .row .panelServices li div h3 {
+  margin: 0 0 0 5px;
+}
+
+.system .row .panelServices li div i {
 
 }
 
-.system .row .panelItem .services li i {
+.system .row .panelServices li div p {
 
 }
 
@@ -163,4 +191,12 @@ body, html { }
   0% { opacity: 1.0; }
   50% { opacity: 0.0; }
   100% { opacity: 1.0; }
+}
+
+.align-center {
+  text-align: center;
+}
+
+.clearfix {
+  overflow: hidden;
 }
