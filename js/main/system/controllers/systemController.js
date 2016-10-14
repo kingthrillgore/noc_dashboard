@@ -83,7 +83,7 @@ nocDashboard.controller("systemController", function($scope, systemFactory, sett
 
 nocDashboard.filter("HumanReadableDateUS", function() {
   return function(unixTime) {
-    var readableDate = moment.unix(unixTime).format('MMM D YYYY h:MM a');
+    var readableDate = moment.unix(unixTime).format('MMM D YYYY h:mm a');
     return readableDate;
   };
 });

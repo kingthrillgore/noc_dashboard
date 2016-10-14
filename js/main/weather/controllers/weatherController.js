@@ -17,6 +17,8 @@ nocDashboard.controller("weatherController", function($scope, weatherFactory, se
   $scope.weather.conditions = {};
   $scope.weather.forecast = {};
 
+  $scope.weather.update_time = moment().format("MMM D YYYY h:mm:ss a");
+
   $scope.pageInit = function() {
     $scope.loadWeatherData();
   };
@@ -39,7 +41,7 @@ nocDashboard.controller("weatherController", function($scope, weatherFactory, se
   };
 
   $scope.getRadarImage = function(WUAPIKey, City, State) {
-    return weatherFactory.getWundergroundAnimatedRadarData(WUAPIKey, City, State, "http://api.wunderground.com/api/", 15, 800, 480);
+    return weatherFactory.getWundergroundAnimatedRadarData(WUAPIKey, City, State, "http://api.wunderground.com/api/", 15, 1000, 480);
   };
 
   $scope.getNWSAlerts = function(ZoneCode) {
@@ -47,12 +49,28 @@ nocDashboard.controller("weatherController", function($scope, weatherFactory, se
   };
 
   $scope.getWUAlerts = function(WUAPIKey, City, State) {
-    $scope.weather.alerts = weatherFactory.getWUAPIWeatherAlerts(WUAPIKey, City, State);
+    weatherFactory.getWUAPIWeatherAlerts(WUAPIKey, City, State).then(function(Response) {
+      console.debug("Alerts Results", Response);
+      $scope.weather.alerts = Response;
+    });
   };
 
   $scope.getConditionsInfo = function(WUAPIKey, City, State) {
     weatherFactory.getWundergroundConditionData(WUAPIKey, City, State).then(function(Response) {
       console.debug("Results", Response);
+
+      //Determine if after sunset or not
+      var currentTime = new Date();
+      var lat = parseFloat(Response.display_location.latitude);
+      var long = parseFloat(Response.display_location.longitude);
+      var SunsetObject = SunCalc.getTimes(new Date(), lat, long);
+
+      if (currentTime >= SunsetObject.sunset) {
+        $scope.weather.conditions.isSunset = true;
+      } else {
+        $scope.weather.conditions.isSunset = false;
+      }
+
       $scope.weather.conditions = Response;
     });
   };

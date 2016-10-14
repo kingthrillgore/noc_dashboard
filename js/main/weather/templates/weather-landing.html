@@ -1,35 +1,80 @@
 <div ng-controller="weatherController" class="weather" ng-init="pageInit()">
   <div class="row">
-    <div class='col-lg-6 weather-radar'>
-      <img src="{{weather.radarImage}}" alt="Radar Image" />
-      <p>Last updated: {{weather.update_time}}</p>
+    <div class="col-lg-3">
+      <div class="current-conditions">
+        <!-- TODO Condition Data -->
+        <h2>{{weather.location_details.city}} {{weather.location_details.state}}</h2>
+
+        <div class="condition-status">
+          <!-- Displays Icon based on known status from feed -->
+          <i class="mdi mdi-weather-sunny" ng-if="weather.conditions.icon === 'clear' && !weather.conditions.isSunset"></i>
+          <i class="mdi mdi-weather-night" ng-if="weather.conditions.icon ==='clear' && weather.conditions.isSunset"></i>
+          <i class="mdi mdi-weather-cloudy" ng-if="weather.conditions.icon ==='cloudy'"></i>
+          <i class="mdi mdi-weather-fog" ng-if="weather.conditions.icon ==='fog'"></i>
+          <i class="mdi mdi-weather-fog" ng-if="weather.conditions.icon ==='hazy'"></i>
+          <!--i class="mdi mdi-weather-hail"></i>
+          <i class="mdi mdi-weather-lightning"></i-->
+          <i class="mdi mdi-weather-lightning-rainy" ng-if="weather.conditions.icon ==='chancetstorms'"></i>
+          <i class="mdi mdi-weather-lightning-rainy" ng-if="weather.conditions.icon ==='tstorms'"></i>
+          <i class="mdi mdi-weather-partlycloudy" ng-if="weather.conditions.icon ==='partlycloudy'"></i>
+          <!--i class="mdi mdi-weather-pouring"></i-->
+          <i class="mdi mdi-weather-rainy" ng-if="weather.conditions.icon ==='chancerain'"></i>
+          <i class="mdi mdi-weather-rainy" ng-if="weather.conditions.icon ==='rain'"></i>
+          <i class="mdi mdi-weather-snowy" ng-if="weather.conditions.icon ==='chancesnow'"></i>
+          <i class="mdi mdi-weather-snowy" ng-if="weather.conditions.icon ==='snow'"></i>
+          <i class="mdi mdi-weather-snowy" ng-if="weather.conditions.icon ==='flurries'"></i>
+          <i class="mdi mdi-weather-snowy-rainy" ng-if="weather.conditions.icon ==='sleet'"></i>
+          <!--i class="mdi mdi-weather-windy"></i-->
+
+          <h3>{{weather.conditions.temp_f}}&deg;</h3>
+        </div>
+
+        <p><strong>Feels Like</strong> {{weather.conditions.feelslike_f}}&deg;</p>
+        <p>
+          <div ng-if="weather.conditions.wind_dir !== 'calm'">
+            <p>
+              <strong>Wind</strong>: {{weather.conditions.wind_dir}} at {{weather.conditions.wind_mph}} MPH ({{weather.conditions.wind_kph}} KPH)
+            </p>
+          </div>
+          <div ng-if="weather.conditions.wind_dir === 'calm'">
+            Winds are calm
+          </div>
+        </p>
+        <p><strong>Pressure</strong>: {{weather.conditions.pressure_in}}&quot; ({{weather.conditions.pressure_mb}} mb {{weather.conditions.pressure_mb | inMMHg}} mmHg)</p>
+      </div>
+      <div class="forecast">
+        <h3>Next 3 Days</h3>
+        <ul class="forecast-record">
+          <li></li>
+        </ul>
+      </div>
     </div>
 
-  <div class="col-lg-6">
-    <div class="current-conditions">
-      <!-- TODO Condition Data -->
-      <h2>{{weather.location_details.city}} {{weather.location_details.state}}</h2>
-      <h3 style='font-size: 7.5em;'>{{weather.conditions.temp_f}}&deg;</h3>
-      <p>Feels Like <strong>{{weather.conditions.feelslike_f}}&deg;</strong></p>
-      <p>Wind: TBD</p>
-      <p>Pressure: <strong>{{weather.conditions.pressure_in}}&quot;</strong> ({{weather.conditions.pressure_mb}} mb {{weather.conditions.pressure_mb | inMMHg}} mmHg)</p>
-    </div>
-    <div class="forecast">
-      <h3>Next 3 Days</h3>
-      <!-- TODO Forecast -->
+    <div class='col-lg-8 col-lg-offset-1 weather-radar'>
+      <img src="{{weather.radarImage}}" alt="Radar Image" />
     </div>
   </div>
 
-  <div class="row nws-alerts">
+  <div class="row weather-alerts">
     <div class="col-lg-12">
       <h2>Current Weather Alerts</h2>
-        <ul class="list-alerts" ng-if="alerts.length > 0">
-          <li ng-repeat="(alertKey, alertValue) in alerts">
-              <p>Alert Record</p>
+        <ul class="list-alerts" ng-if="weather.alerts.alerts.length > 0">
+          <li ng-repeat="(alertKey, alertValue) in weather.alerts.alerts">
+            <i class="mdi mdi-alert-box"></i>
+            <p>{{alertValue.description}} (Expires at {{alertValue.expires}})</p>
           </li>
         </ul>
 
-        <h3 ng-if="alerts.length === 0">There are no active Weather Alerts.</h3>
+        <div class="noalerts align-center" ng-if="weather.alerts.alerts.length === 0">
+          <i class="mdi mdi-emoticon-happy"></i>
+          <h3>There are no active weather alerts</h3>
+        </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <p class="align-center">Last updated: {{weather.update_time}}</p>
     </div>
   </div>
 </div>

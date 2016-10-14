@@ -19,6 +19,27 @@
     </fieldset>
 
     <fieldset>
+      <legend>Live Alerts</legend>
+      <p>The NOC Dashboard Server must be installed for this to work.</p>
+
+      <div class="form-group">
+        <input type="checkbox" id="enableLiveAlerts" ng-model="settings.enableLiveAlerts" /> Enable All Alerts
+      </div>
+
+      <div class="form-group">
+        <input type="checkbox" id="enableNetworkAlerts" ng-model="settings.enableNetworkAlerts" /> Enable Network Alerts
+      </div>
+
+      <div class="form-group">
+        <input type="checkbox" id="enableWeatherAlerts" ng-model="settings.enableWeatherAlerts" /> Enable Weather Alerts
+      </div>
+
+      <div class="form-group">
+        <input type="checkbox" id="enableServiceAlerts" ng-model="settings.enableServiceAlerts" /> Enable Service Alerts
+      </div>
+    </fieldset>
+
+    <!--fieldset>
       <legend>Weather</legend>
 
       <div class="checkbox">
@@ -27,7 +48,7 @@
         </label>
         <p><span style="font-weight:bold">This is still a beta feature.</span> When a weather alert is received, the system will immediately open a modal specifying the weather alert, followed by an alert noise (if your browser supports HTML5 audio). You must have NWS CAP Feeds enabled, and the NOCDashboard WebSocketsService Application.</p>
       </div>
-    </fieldset>
+    </fieldset-->
 
     <fieldset>
       <legend>Restore Defaults</legend>
