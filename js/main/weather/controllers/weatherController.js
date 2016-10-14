@@ -3,13 +3,15 @@
  * @author Cameron Kilgore
  */
 
-nocDashboard.controller("weatherController", function($scope, weatherFactory, SETTINGS) {
-  $scope.location_details = {
-    city: "Roswell",
-    state: "GA",
-  };
-  $scope.nws_zone_code = "NCC101";
+nocDashboard.controller("weatherController", function($scope, weatherFactory, settings) {
   $scope.weather = {};
+  $scope.weather.settings = settings;
+  $scope.weather.location_details = {
+    city: $scope.weather.settings.wunderground_city,
+    state: $scope.weather.settings.wunderground_state,
+  };
+  $scope.weather.nws_zone_code = $scope.weather.settings.cap_atom_feed_zonecode;
+  $scope.weather.WUAPIKey = $scope.weather.settings.wunderground_api_key;
   $scope.weather.radarImage = "";
   $scope.weather.alerts = {};
   $scope.weather.conditions = {};
@@ -24,16 +26,16 @@ nocDashboard.controller("weatherController", function($scope, weatherFactory, SE
     //$scope.alerts = $scope.getNWSAlerts("NCZ106");
 
     //Get Wunderground Alerts
-    $scope.getWUAlerts("WU_API_KEY", $scope.location_details.city, $scope.location_details.state);
+    $scope.getWUAlerts($scope.weather.WUAPIKey, $scope.weather.location_details.city, $scope.weather.location_details.state);
 
     //Get Radar Image
-    $scope.weather.radarImage = $scope.getRadarImage("WU_API_KEY", $scope.location_details.city, $scope.location_details.state);
+    $scope.weather.radarImage = $scope.getRadarImage($scope.weather.WUAPIKey, $scope.weather.location_details.city, $scope.weather.location_details.state);
 
     //Get Current Conditions Data
-    $scope.getConditionsInfo("WU_API_KEY", $scope.location_details.city, $scope.location_details.state);
+    $scope.getConditionsInfo($scope.weather.WUAPIKey, $scope.weather.location_details.city, $scope.weather.location_details.state);
 
     //Get Forecast Data
-    $scope.getForecastInfo("WU_API_KEY", $scope.location_details.city, $scope.location_details.state);
+    $scope.getForecastInfo($scope.weather.WUAPIKey, $scope.weather.location_details.city, $scope.weather.location_details.state);
   };
 
   $scope.getRadarImage = function(WUAPIKey, City, State) {
@@ -42,25 +44,31 @@ nocDashboard.controller("weatherController", function($scope, weatherFactory, SE
 
   $scope.getNWSAlerts = function(ZoneCode) {
     $scope.weather.alerts = weatherFactory.getNWSWeatherAlerts(ZoneCode);
-
-    console.debug("Alerts Call Made", $scope.alerts);
   };
 
   $scope.getWUAlerts = function(WUAPIKey, City, State) {
     $scope.weather.alerts = weatherFactory.getWUAPIWeatherAlerts(WUAPIKey, City, State);
-
-    console.debug("Alerts Call Made", $scope.alerts);
   };
 
   $scope.getConditionsInfo = function(WUAPIKey, City, State) {
-    $scope.weather.conditions = weatherFactory.getWundergroundConditionData(WUAPIKey, City, State);
-
-    console.debug("Conditions Call Made", $scope.weather.conditions);
+    weatherFactory.getWundergroundConditionData(WUAPIKey, City, State).then(function(Response) {
+      console.debug("Results", Response);
+      $scope.weather.conditions = Response;
+    });
   };
 
   $scope.getForecastInfo = function(WUAPIKey, City, State) {
-    $scope.weather.forecast = weatherFactory.getWundergroundForecastData(WUAPIKey, City, State);
+    weatherFactory.getWundergroundForecastData(WUAPIKey, City, State).then(function(Response) {
+      console.debug("Results", Response);
+      $scope.weather.forecast = Response;
+    });
+  };
+});
 
-    console.debug("Forecast Call Made", $scope.weather.forecast);
+nocDashboard.filter("inMMHg", function() {
+  return function(pressureMb) {
+    var pressureMMHg = pressureMb * 0.75006375541921;
+    pressureMMHg = parseFloat(pressureMMHg).toFixed(2);
+    return pressureMMHg;
   };
 });

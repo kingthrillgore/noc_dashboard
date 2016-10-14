@@ -91,6 +91,8 @@ nocDashboard.factory('weatherFactory', function($http, $q) {
     }, function(ErrorResponse) {
       console.debug("Error", Error);
     });
+
+    return deferred.promise;
   };
 
   /**
@@ -213,8 +215,8 @@ nocDashboard.factory('weatherFactory', function($http, $q) {
     //Make Request and return Promise
     $http.get(requestUrl).then(function(SuccessResponse) {
       console.debug("Wunderground API Response", SuccessResponse);
-      if(SuccessResponse.success !== false) {
-        deferred.resolve(SuccessResponse.data);
+      if(SuccessResponse.status === 200) {
+        deferred.resolve(SuccessResponse.data.current_observation);
       } else {
         console.log("Somthing's gone wrong.");
         var error = {
@@ -229,6 +231,8 @@ nocDashboard.factory('weatherFactory', function($http, $q) {
     }, function(ErrorResponse) {
       console.debug("Error", Error);
     });
+
+    return deferred.promise;
   };
 
   /**
@@ -270,8 +274,8 @@ nocDashboard.factory('weatherFactory', function($http, $q) {
     //Make Request and return Promise
     $http.get(requestUrl).then(function(SuccessResponse) {
       console.debug("Wunderground API Response", SuccessResponse);
-      if(SuccessResponse.success !== false) {
-        deferred.resolve(SuccessResponse.data);
+      if(SuccessResponse.status === 200) {
+        deferred.resolve(SuccessResponse.data.forecast.simpleforecast);
       } else {
         console.log("Somthing's gone wrong.");
         var error = {
@@ -286,6 +290,8 @@ nocDashboard.factory('weatherFactory', function($http, $q) {
     }, function(ErrorResponse) {
       console.debug("Error", Error);
     });
+
+    return deferred.promise;
   };
 
   return service;

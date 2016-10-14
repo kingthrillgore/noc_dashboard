@@ -8,8 +8,11 @@
   <div class="col-lg-6">
     <div class="current-conditions">
       <!-- TODO Condition Data -->
-      <h2>{{location_details.city}} {{location_details.state}}</h2>
-      <p class="font-montserrant">{{weather.temperature}} &deg;</p>
+      <h2>{{weather.location_details.city}} {{weather.location_details.state}}</h2>
+      <h3 style='font-size: 7.5em;'>{{weather.conditions.temp_f}}&deg;</h3>
+      <p>Feels Like <strong>{{weather.conditions.feelslike_f}}&deg;</strong></p>
+      <p>Wind: TBD</p>
+      <p>Pressure: <strong>{{weather.conditions.pressure_in}}&quot;</strong> ({{weather.conditions.pressure_mb}} mb {{weather.conditions.pressure_mb | inMMHg}} mmHg)</p>
     </div>
     <div class="forecast">
       <h3>Next 3 Days</h3>
