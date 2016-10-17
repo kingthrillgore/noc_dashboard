@@ -1,5 +1,24 @@
 <div ng-controller="jenkinsController" class="jenkins" ng-init="pageInit()">
   <div class="row">
+    <div class="col-lg-6">
+      <h2>Recent Successful Builds</h2>
+      <div ng-repeat="item in jenkins.jobs.successful">
+        <h3>{{item.fullDisplayName}}</h3>
+      </div>
+    </div>
 
+    <div class="col-lg-6">
+      <h2>Recent Failed Builds</h2>
+      <div ng-repeat="item in jenkins.jobs.failed">
+        <h3>{{item.fullDisplayName}}</h3>
+      </div>
+      <p ng-if="jenkins.jobs.missing > 0">and {{jenkins.jobs.missing}} jobs have never run.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <h2>Builds in Progress</h2>
+    </div>
   </div>
 </div>

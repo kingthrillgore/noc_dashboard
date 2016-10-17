@@ -7,6 +7,25 @@ nocDashboard.factory("jenkinsFactory", function($http, $q) {
   var service = {};
 
   /**
+   * Traverses a JSON-parsed object through iteration, and removes entries with
+   * the _class key, an artifact commonly found in default Jenkins
+   * configurations. The process is executed recursively to speed up
+   * performance, at the cost of memory.
+   * @param  {[type]} RequestObj [description]
+   * @param  {[type]} ProcessFunc [description]
+   * @return {[type]}            [description]
+   */
+  service.TraverseJSONObject = function(RequestObj) {
+    for(var prop in RequestObj) {
+      if (prop === '_class') {
+        delete RequestObj[prop];
+      } else if (typeof RequestObj[prop] === 'object') {
+        service.TraverseJSONObject(RequestObj[prop]);
+      }
+    }
+  };
+
+  /**
    * Gets current load status on Jenkins. This is not intended to replace load
    * details reported by Icinga.
    * @param  {[type]} JenkinsRESTURL [description]
@@ -23,6 +42,7 @@ nocDashboard.factory("jenkinsFactory", function($http, $q) {
     var deferred = $q.defer();
 
     $http.get(requestURL).then(function success(response) {
+      service.TraverseJSONObject(response.data);
       deferred.resolve(response.data);
     }, function error(response) {
       console.debug("Error", response);
@@ -49,6 +69,7 @@ nocDashboard.factory("jenkinsFactory", function($http, $q) {
 
     $http.get(RequestURL).then(function success(response) {
       console.debug("Response", response);
+      service.TraverseJSONObject(response.data);
       deferred.resolve(response.data);
     }, function error(response) {
       console.debug("Error", response);
@@ -80,7 +101,7 @@ nocDashboard.factory("jenkinsFactory", function($http, $q) {
       return false;
     }
 
-    if((typeof BuildType !== "string") || (typeof BuildType !== "number")) {
+    if(typeof BuildType === "undefined") {
       BuildType = "lastStableBuild";
     }
 
@@ -106,12 +127,21 @@ nocDashboard.factory("jenkinsFactory", function($http, $q) {
     //Build URL
     var requestURL = JenkinsRESTURL + "/job/"+JobID+"/"+BuildType+"/api/json";
     var deferred = $q.defer();
+    var errorObj = {};
 
     //Get Job details from Jenkins
     $http.get(requestURL).then(function success(response) {
+      service.TraverseJSONObject(response.data);
       deferred.resolve(response.data);
     }, function error(response) {
       console.debug("Error", response);
+      //TODO refactor error as we could get a lot more states than just 400 here
+      errorObj = {
+        'error': true,
+        'type': "RECORD_NOT_AVAILABLE",
+        'message': "The request returned a 404 Not Found."
+      };
+      deferred.resolve(errorObj);
     });
 
     return deferred.promise;
@@ -133,6 +163,7 @@ nocDashboard.factory("jenkinsFactory", function($http, $q) {
     var deferred = $q.defer();
 
     $http.get(requestURL).then(function success(response) {
+      service.TraverseJSONObject(response.data);
       deferred.resolve(response.data);
     }, function error(response) {
       console.debug("Error", response);
