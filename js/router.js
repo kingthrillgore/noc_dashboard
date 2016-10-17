@@ -25,7 +25,7 @@ nocDashboard.config(function($routeProvider) {
 
     //Jenkins Status
     .when('/jenkins', {
-      templateUrl: 'js/main/system/templates/jenkins-landing.html',
+      templateUrl: 'js/main/jenkins/templates/jenkins-landing.html',
       controller: 'jenkinsController'
     })
 
