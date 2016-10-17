@@ -60,7 +60,15 @@
 
             <!-- CRITICAL Statuses (TODO: Convert to Regex) -->
             <i class="mdi mdi-alert" style="color: red; animation: blinker 1s linear infinite;" title="{{serviceRecordValue.plugin_output}}" ng-if="serviceRecordValue.plugin_output.indexOf('CRITICAL') > -1"></i>
+            <i class="mdi mdi-alert" style="color: red; animation: blinker 1s linear infinite;" title="{{serviceRecordValue.plugin_output}}" ng-if="serviceRecordValue.plugin_output.indexOf('NRPE: Command') > -1"></i>
             <i class="mdi mdi-alert" style="color: red; animation: blinker 1s linear infinite;" title="{{serviceRecordValue.plugin_output}}" ng-if="serviceRecordValue.plugin_output.indexOf('No route to host') > -1"></i>
+
+            <!-- UNKNOWN Statuses -->
+            <i class="mdi mdi-help-circle" style="color: orange;" title="{{serviceRecordValue.plugin_output}}" ng-if="serviceRecordValue.plugin_output.indexOf('No output returned') > -1"></i>
+
+            <!-- PENDING Status -->
+            <i class="mdi mdi-checkbox-blank-circle-outline" style="color: #333;" title="{{serviceRecordValue.plugin_output}}" ng-if="serviceRecordValue.plugin_output.indexOf('Service check scheduled') > -1"></i>
+
 
             <h3 title="Last Updated at {{serviceRecordValue.last_check | HumanReadableDateUS}}" ng-if="serviceRecordValue.current_state.indexOf('0') === -1" >{{servicesKey}}: {{serviceRecordKey | limitTo : 45 }}</h3>
 

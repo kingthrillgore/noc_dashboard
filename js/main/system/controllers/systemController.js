@@ -31,7 +31,7 @@ nocDashboard.controller("systemController", function($scope, systemFactory, sett
   $scope.getSystemStatusRecords = function(NagiosAPIURL, NagiosAPIPort) {
     $scope.nagios.timeOfRequest = moment().format("MMM D YYYY h:mm:ss a");
     systemFactory.getNagiosAllHostsStatus(NagiosAPIURL, NagiosAPIPort).then(function(Response) {
-      console.debug("Results", Response);
+      console.debug("Systems Results", Response);
 
       //Build the Summary of Hosts based on the current_state variables in the Hosts
       angular.forEach(Response, function(value, key) {
@@ -53,6 +53,10 @@ nocDashboard.controller("systemController", function($scope, systemFactory, sett
         //Build the Summary of Services based on the current_state variables in the Services
         angular.forEach(value.services, function(value2, key2) {
           var hostStateInteger = parseInt(value2.current_state, 10);
+          var lastHardState = parseInt(value2.last_hard_state, 10);
+          var currentAttempt = parseInt(value2.current_attempt, 10);
+
+          //Service check scheduled
 
           if(hostStateInteger === 0) {
             $scope.nagios.services.online++;
@@ -63,9 +67,14 @@ nocDashboard.controller("systemController", function($scope, systemFactory, sett
             $scope.nagios.services.warning++;
           }
 
-          if(hostStateInteger > 1) {
+          if(hostStateInteger === 2) {
             $scope.nagios.services.problems++;
             $scope.nagios.services.critical++;
+          }
+
+          if(hostStateInteger === 3) {
+            $scope.nagios.services.problems++;
+            $scope.nagios.services.unknown++;
           }
         });
       });
