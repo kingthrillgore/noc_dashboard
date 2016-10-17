@@ -70,6 +70,6 @@ nocDashboard.controller("tabsController", function($scope, $localStorage, $sessi
 
     //TODO Switch to the next page
 
-    console.debug("SetInterval firing", moment());
+    //console.debug("SetInterval firing", moment());
   };
 });
