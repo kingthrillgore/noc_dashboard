@@ -29,12 +29,27 @@ nocDashboard.config(function($routeProvider) {
       controller: 'jenkinsController'
     })
 
+    //Tickets
+    .when('/tickets', {
+      templateUrl: 'js/main/tickets/templates/tickets-landing.html',
+      controller: 'ticketsController'
+    })
+
+    ///Communication Status
+    .when('/communication', {
+      templateUrl: 'js/main/communication/templates/communication-landing.html',
+      controller: 'communicationController'
+    })
+
     //Weather
     .when('/weather', {
       templateUrl: 'js/main/weather/templates/weather-landing.html',
       controller: 'weatherController'
-    });
+    })
 
     //News
-    //.when('/')
+    .when('/news', {
+      templateUrl: 'js/main/news/templates/news-landing.html',
+      controller: 'newsController'
+    });
 });

@@ -3,6 +3,8 @@
  * @author Cameron Kilgore
  */
 
-nocDashboard.controller("networkController", function() {
+nocDashboard.controller("networkController", function($scope) {
+  $scope.pageInit = function() {
 
+  };
 });
