@@ -100,7 +100,7 @@ body, html {
 .system .row .nagios-summary {
   min-height: 135px;
   overflow: hidden;
-  margin: 0 0 2%;
+  margin: 0 0 1%;
 }
 
 .system .row .nagios-summary h2,

@@ -12,7 +12,7 @@
       </div>
 
       <div class="col-lg-4 col-lg-offset-2">
-        <h2 ng-if="nagios.services.online > 0">{{nagios.services.online}} Services Operating Normally</h2>
+        <h2 ng-if="nagios.services.online > 0">{{nagios.services.online}} Services Online</h2>
         <h3 ng-if="nagios.services.problems > 0">{{nagios.services.problems}} Problems</h3>
         <ul>
           <li ng-if="nagios.services.warning > 0"><h4>{{nagios.services.warning}} Warnings</h4></li>
