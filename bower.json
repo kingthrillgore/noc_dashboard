@@ -28,6 +28,7 @@
     "angular-animate": "^1.5.8",
     "angular-bootstrap": "^2.2.0",
     "ngstorage": "^0.3.11",
-    "suncalc": "^1.7.0"
+    "suncalc": "^1.7.0",
+    "chart.js": "^2.3.0"
   }
 }
