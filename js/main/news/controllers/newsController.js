@@ -4,6 +4,15 @@
  */
 
 nocDashboard.controller("newsController", function($scope, newsFactory, settings) {
+  $scope.news = {
+    settings: {
+      'passthrough_enabled': settings.use_passthrough
+    },
+    news_feeds: []
+  };
+
+  $scope.newsFeedData = [];
+
   $scope.pageInit = function() {
     $scope.getHeadlines();
   };
@@ -13,13 +22,45 @@ nocDashboard.controller("newsController", function($scope, newsFactory, settings
     if(typeof numHeadlines !== "number") {
       numHeadlines = 10;
     }
+    var usePassthrough = false;
 
-    console.log("Call made");
-    newsFactory.getLatestHeadlines("http://rss.cnn.com/rss/cnn_topstories.rss", true).then(function(SuccessResponse) {
+    //Determine if Passthrough is enabled
+    if($scope.news.settings.passthrough_enabled === true) {
+      usePassthrough = true;
+    }
+
+    angular.forEach(settings.news_feed_urls, function(value, key) {
+      $scope.news.news_feeds.push(value);
+
+      newsFactory.getLatestHeadlines(value, usePassthrough).then(function(SuccessResponse) {
+        console.debug("SuccessResponse", SuccessResponse);
+
+        var newsFeedItem = {
+          feed_name: SuccessResponse.title,
+          feed_items: []
+        };
+
+        //Trim Items down to number specified.
+        newsFeedItem.feed_items = SuccessResponse.item.splice(0, settings.news_max_items);
+        $scope.newsFeedData.push(newsFeedItem);
+        console.debug("$scope.newsFeedData", $scope.newsFeedData);
+      }, function(ErrorResponse) {
+        console.debug("ErrorResponse", ErrorResponse);
+      });
+    });
+
+
+    /* newsFactory.getLatestHeadlines("http://rss.cnn.com/rss/cnn_topstories.rss", usePassthrough).then(function(SuccessResponse) {
       console.debug("SuccessResponse", SuccessResponse);
       //Trim Items down to number specified.
+      var newsFeedItem = {
+        feed_name: SuccessResponse.title,
+        feed_items: []
+      };
+
+      $newsFeedItem.feed_items = SuccessResponse.item.splice(0, numHeadlines); //settings.news_max_items
     }, function(ErrorResponse) {
       console.debug("ErrorResponse", ErrorResponse);
-    });
+    }); */
   };
 });
