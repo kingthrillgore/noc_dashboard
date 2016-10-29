@@ -1,5 +1,19 @@
 # NOC Dashboard
-This is an HTML5-based dashboard intended for use inside a Company's NOC or On Call operations area. It is intended to
+This is an HTML5-based dashboard intended for use inside a Company's NOC or On Call operations area. It is intended to...well...report shit.
+
+Ideally, you can use cast-anything to spit this to a Chromecast-driven display and rock out with your box out or whatever. I'm not your dad. You can do whatever you want.
+
+## Installation
+To install, clone this git repo, unpack to a web server, and then install Bower dependencies:
+
+```shell
+$ git clone {{ repo }}
+$ bower install
+```
+
+Additional features may require the companion Dashboard Server, available [here](https://bitbucket.org/internaldevck/noc_dashboard_server).
+
+If you have issues setting up a web server to host your application, please click the Back button and find another career choice.
 
 ## Requirements
 
@@ -11,7 +25,7 @@ There is no native Nagios 4/XI support at this time.
 ### Systems Monitor (Icinga)
 If you are using systems-icinga, then you need nothing else. Icinga2 has its own REST Service. Just define those settings in config.js.
 
-## Weather
+### Weather
 For the Weather monitor, you will need a [Weather Underground API Key](https://www.wunderground.com/weather/api) of "Cumulus" type. For testing purposes you should be able to use the free Developer key. However once you deploy this in an enterprise, you are required to pay for a license. There is currently no free weather API integration (if you want to help, check out open issues).
 
 ### Weather Alerts
@@ -21,36 +35,26 @@ Regardless of what mechanism you use, you can configure what kind of alerts are 
 
 All codes related to the national activation of the EAS are not covered by this service. It goes without saying that if the EAS is activated, you may have bigger concerns than your job.
 
-Weather Alerts are not supported for Europe using either mechanism. If you are not a EU user, set "ENABLE_WEATHER_ALERTS" to false. If you are an EU user and can help with this, check the open ticket.
+Weather and Weather Alerts are not supported for Europe within the current application configuration (at least, not sanely). There are open issues to address this!
 
-#### NWS Alerts
-**NWS Alerts are currently in development.**
+#### Alternative Alert Feeds
+**Alternative Alert Feeds (NWS, Meteoalarm) are currently in development.**
 
-~~To use the NWS Feeds, you will need to get [the FIPS code for your region](http://www.nws.noaa.gov/nwr/coverage/county_coverage.html). These alerts have substantially more detail than Wunderground, and cover every possible warning considered part of the EAS SAME Standard.
+### Network
+TBD.
 
-By default, alerts considered WARN by the EAS standard will be displayed. If you want this to function similar to Wunderground alerts, set config.js to use "WARN_WUNDERGROUND". This will skip a lot of non-weather related alerts.
+ntop-ng is a requirement to view Network information.
 
-All codes related to the activation of the EAS are not covered by this service (The NWS does not provision support for these codes). It goes without saying that if the EAS is activated, you may have bigger concerns than your job.~~
-
-
-## Network
-TBD
-
-## Tickets
+### Tickets
 By default, the system will parse JIRA, Redmine, Trac, and OpenProject tickets from RSS feeds, once defined in the config.js.
 
-## Jenkins
-TBD
+### Jenkins
+Define the necessary rules to access Jenkins REST services in config.js, and make sure you have CORS headers set up on Jenkins. The [CORS Header plugin](https://wiki.jenkins-ci.org/display/JENKINS/Cors+Filter+Plugin) is really useful. 
 
-## Installation
-To install, clone this git repo, unpack to a web server, and then install Bower dependencies:
+### News
+It's likely that for some News and other RSS Services, you'll need to work around Access-Control-Allow-Origin header issues. The [NOC Dashboard Server](https://bitbucket.org/internaldevck/noc_dashboard_server) was built for just this. View the steps on that project for information on installation.
 
-```shell
-$ git clone {{ repo }}
-$ bower install
-```
-
-If you have issues setting up a web server to host your application, please click the Back button and find another career choice.
+Otherwise, add RSS feeds and enjoy. Feeds update as the page loads. You are 100% responsible for using the feed providers as they are intended per their licensing terms and so forth.
 
 ## License
 Available under the terms of the MIT License. See LICENSE.md.
