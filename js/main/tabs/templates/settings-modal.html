@@ -7,18 +7,17 @@
 
       <div class="form-group">
         <label for="cycleTime">Seconds per screen</label>
-        <input type="number" class="form-control" id="cycleTime" ng-model="settings.cycleTime" />
+        <input type="number" class="form-control" id="cycleTime" ng-model="tabs.settings.cycleTime" />
       </div>
 
       <div class="checkbox">
         <label for="haltPageChange">
-          <input type="checkbox" id="haltPageChange" ng-model="settings.disableScreenChange" /> Disable screen changing
+          <input type="checkbox" id="haltPageChange" ng-model="tabs.settings.disableScreenChange" /> Disable screen changing
         </label>
-        <p>This will automatically disable if you click one of the tabs.</p>
       </div>
     </fieldset>
 
-    <fieldset>
+    <!--fieldset>
       <legend>Live Alerts</legend>
       <p>The NOC Dashboard Server must be installed for this to work.</p>
 
@@ -37,7 +36,7 @@
       <div class="form-group">
         <input type="checkbox" id="enableServiceAlerts" ng-model="settings.enableServiceAlerts" /> Enable Service Alerts
       </div>
-    </fieldset>
+    </fieldset-->
 
     <!--fieldset>
       <legend>Weather</legend>

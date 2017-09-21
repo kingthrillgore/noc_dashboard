@@ -48,19 +48,5 @@ nocDashboard.controller("newsController", function($scope, newsFactory, settings
         console.debug("ErrorResponse", ErrorResponse);
       });
     });
-
-
-    /* newsFactory.getLatestHeadlines("http://rss.cnn.com/rss/cnn_topstories.rss", usePassthrough).then(function(SuccessResponse) {
-      console.debug("SuccessResponse", SuccessResponse);
-      //Trim Items down to number specified.
-      var newsFeedItem = {
-        feed_name: SuccessResponse.title,
-        feed_items: []
-      };
-
-      $newsFeedItem.feed_items = SuccessResponse.item.splice(0, numHeadlines); //settings.news_max_items
-    }, function(ErrorResponse) {
-      console.debug("ErrorResponse", ErrorResponse);
-    }); */
   };
 });

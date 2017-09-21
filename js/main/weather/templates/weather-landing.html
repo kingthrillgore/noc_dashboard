@@ -1,8 +1,7 @@
 <div ng-controller="weatherController" class="weather" ng-init="pageInit()">
   <div class="row">
-    <div class="col-lg-3">
+    <div class="col-lg-4">
       <div class="current-conditions">
-        <!-- TODO Condition Data -->
         <h2>{{weather.location_details.city}} {{weather.location_details.state}}</h2>
 
         <div class="condition-status">
@@ -40,15 +39,17 @@
         </p>
         <p><strong>Pressure</strong>: {{weather.conditions.pressure_in}}&quot; ({{weather.conditions.pressure_mb}} mb {{weather.conditions.pressure_mb | inMMHg}} mmHg)</p>
       </div>
-      <div class="forecast">
+
+      <!-- TODO -->
+      <!--div class="forecast">
         <h3>Next 3 Days</h3>
         <ul class="forecast-record">
           <li></li>
         </ul>
-      </div>
+      </div-->
     </div>
 
-    <div class='col-lg-8 col-lg-offset-1 weather-radar'>
+    <div class='col-lg-8 weather-radar'>
       <img src="{{weather.radarImage}}" alt="Radar Image" />
     </div>
   </div>

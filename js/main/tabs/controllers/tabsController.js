@@ -31,7 +31,9 @@ nocDashboard.controller("tabsController", function($scope, $localStorage, $sessi
       $scope.tabs.settings.cycleTime = 10;
     }
 
-    $scope.cycleThroughScreens();
+    if($scope.tabs.settings.disableScreenChange !== true) {
+      $scope.cycleThroughScreens();
+    }
   };
 
   $scope.mouseOverDetect = function(data) {
@@ -61,14 +63,24 @@ nocDashboard.controller("tabsController", function($scope, $localStorage, $sessi
 
   $scope.saveApplicationSettings = function() {
     //Validate settings
-    if(typeof $scope.settings.cycleTime === undefined) {
+    if(typeof $scope.tabs.settings.cycleTime === undefined) {
       $scope.tabs.settings.cycleTime = 10;
     }
 
-    //TODO if still set to do so, re-initalize cycleThroughScreens()
+    //Check if Auto-refresh has changed
+    if($scope.tabs.settings.disableScreenChange === true) {
+      if(angular.isDefined(cycleTabs)) {
+        $interval.cancel(cycleTabs);
+        cycleTabs = undefined;
+      } else {
+        $scope.cycleThroughScreens();
+      }
+    }
+
+    //TODO If Time between tabs has changed, Unset and Reload $interval
 
     //Save changes to localStorage
-    $localStorage.settings = $scope.settings;
+    $localStorage.settings = $scope.tabs.settings;
 
     //Close modal
     Popeye.closeCurrentModal();
@@ -92,7 +104,7 @@ nocDashboard.controller("tabsController", function($scope, $localStorage, $sessi
   $scope.cycleThroughScreens = function() {
     var intervalTimerMillisec = $scope.tabs.settings.cycleTime * 1000;
 
-    $interval(
+    cycleTabs = $interval(
       function() {
         $scope.changeScreen();
       }, intervalTimerMillisec);
